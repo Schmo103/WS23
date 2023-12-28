@@ -1,0 +1,11 @@
+res://player/player.tscn
+res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres
+res://test_world/fog.gdshader
+res://test_world/test_world.tscn
+res://menus/main_menu.tscn
+res://player/bullet.tscn
+res://test_world/wall_02.tscn
+res://test_world/wall_03.tscn
+res://test_world/wall_04.tscn
+res://test_world/wall_05.tscn
+res://menus/player_customization_menu.tscn

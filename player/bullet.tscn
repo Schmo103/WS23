@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7kne16op4siw"]
+
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="1_ghasw"]
+[ext_resource type="Script" path="res://player/bullet.gd" id="1_wm5ir"]
+[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="3_mp2cq"]
+[ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="4_q6cyl"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_3prgh"]
+buffer_length = 0.93
+
+[node name="bullet" type="Node2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_wm5ir")
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("1_ghasw")
+broadcast = 3
+process = 1
+refresh_rate = 45
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("1_ghasw")
+broadcast = 3
+process = 1
+refresh_rate = 20
+node_path = NodePath("..")
+property_name = "rotation"
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
+position = Vector2(-2, -4)
+rotation = 1.5708
+polygon = PackedVector2Array(-129, -5.99953, -18.0012, -334, 119, -0.000430822, 3.00112, 310)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0.072937, -1.1582)
+rotation = 1.5708
+color = Color(0.121569, 0.486275, 0.619608, 1)
+offset = Vector2(-2315.84, -745.919)
+texture = ExtResource("3_mp2cq")
+polygon = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826, 2257.97, 1110.15, 2378.26, 1052.17, 2504.35, 714.493, 2321.74, 402.899)
+uv = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826, 2257.97, 1110.15, 2378.26, 1052.17, 2504.35, 714.493, 2321.74, 402.899)
+
+[node name="bullet_sound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamGenerator_3prgh")
+
+[node name="life_time" type="Timer" parent="."]
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-70, -40)
+rotation = 1.5708
+scale = Vector2(1, 1)
+energy = 2.01
+blend_mode = 2
+texture = ExtResource("4_q6cyl")
+texture_scale = 0.54
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="life_time" to="." method="_on_life_time_timeout"]

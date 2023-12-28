@@ -1,0 +1,14 @@
+PointLight2D
+CanvasModulate
+Sprite2D
+WorldEnvironment
+ColorRect
+Polygon2D
+CollisionPolygon2D
+StaticBody2D
+Node2D
+Timer
+NodeInstantiator
+AudioStreamPlayer2D
+Area2D
+PropertySynchronizer

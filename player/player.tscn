@@ -1,0 +1,244 @@
+[gd_scene load_steps=11 format=3 uid="uid://cn5vis7la5wml"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
+[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_v68i0"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="3_hdoig"]
+[ext_resource type="PackedScene" uid="uid://b7kne16op4siw" path="res://player/bullet.tscn" id="4_b7xsc"]
+[ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="6_sis2c"]
+[ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="7_e0nhq"]
+
+[sub_resource type="Animation" id="Animation_hsw0d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skin_1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skin_1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skin_2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.950226, -1.27876)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skin_2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0647286]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skin_2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.18084, 1.33484)]
+}
+
+[sub_resource type="Animation" id="Animation_66wf3"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("skin_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("skin_1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("skin_1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.941365, 0.722394)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("skin_2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("skin_2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0647286, -0.0647286]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("skin_2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.18084, 1.33484), Vector2(1.08733, 0.871077)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jegl2"]
+_data = {
+"RESET": SubResource("Animation_hsw0d"),
+"walk": SubResource("Animation_66wf3")
+}
+
+[node name="player" type="CharacterBody2D" groups=["damageables"]]
+rotation = 0.161335
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_nlfmk")
+
+[node name="bullet_instantiator" type="Node" parent="."]
+script = ExtResource("3_hdoig")
+spawn_type = 1
+target_location = null
+scene = ExtResource("4_b7xsc")
+sync_starting_changes = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(180, -190, 200, -190, 310, 160, 290, 180, -440, 90, -450, 60)
+
+[node name="skin_1" type="Polygon2D" parent="."]
+offset = Vector2(-460, -220)
+texture = ExtResource("2_jqu0l")
+polygon = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817.021, 425.532)
+uv = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817.021, 425.532)
+
+[node name="skin_2" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(-0.950226, -1.27876)
+rotation = -0.0647286
+scale = Vector2(1.18084, 1.33484)
+offset = Vector2(-2110.85, -213.182)
+texture = ExtResource("2_jqu0l")
+polygon = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
+uv = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jegl2")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("2_v68i0")
+broadcast = 2
+refresh_rate = 20
+node_path = NodePath("..")
+property_name = "rotation"
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("2_v68i0")
+broadcast = 2
+refresh_rate = 20
+node_path = NodePath("..")
+property_name = "position"
+interpolated = true
+interpolation_speed = 10.0
+
+[node name="user_label" type="Label" parent="."]
+offset_left = -408.704
+offset_top = -602.167
+offset_right = 140.296
+offset_bottom = -329.167
+rotation = -0.170085
+theme = ExtResource("6_sis2c")
+theme_override_font_sizes/font_size = 200
+text = "name"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-35.3632, 363.738)
+scale = Vector2(2.43367, 2.44868)
+energy = 1.75
+blend_mode = 1
+shadow_enabled = true
+texture = ExtResource("7_e0nhq")
+texture_scale = 1.09

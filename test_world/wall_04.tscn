@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cecxluda21lcg"]
+
+[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="1_qjff0"]
+
+[node name="wall_04" type="StaticBody2D"]
+scale = Vector2(0.3, 0.3)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-5, -4)
+offset = Vector2(-418, -1059)
+texture = ExtResource("1_qjff0")
+polygon = PackedVector2Array(28.125, 378.125, 393.75, 390.625, 721.875, 803.125, 706.25, 1190.63, 731.25, 1343.75, 767.105, 1596.05, 622.368, 1743.42, 575, 1748.68, 232.895, 1651.32, 156.579, 1025, -61.8421, 603.947)
+uv = PackedVector2Array(28.125, 378.125, 393.75, 390.625, 721.875, 803.125, 706.25, 1190.63, 731.25, 1343.75, 767.105, 1596.05, 622.368, 1743.42, 575, 1748.68, 232.895, 1651.32, 156.579, 1025, -61.8421, 603.947)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-76, -660, 191, -260, 322, 500, 180, 683, -137, 575, -220, -53, -395, -408, -360, -663)

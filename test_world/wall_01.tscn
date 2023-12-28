@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpl4tmsucgxer"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j74n2"]
+
+[node name="wall_01" type="StaticBody2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.188235, 0.0588235, 0.0862745, 1)
+offset = Vector2(-975, -667)
+texture = SubResource("PlaceholderTexture2D_j74n2")
+polygon = PackedVector2Array(721, 163, 636, 259, 697, 394, 671, 543, 720, 694, 1022, 764, 1329, 608, 1440, 357, 1378, 290, 1300, 298, 1223, 415, 1179, 559, 1003, 627, 809, 581, 780, 494, 813, 378, 719, 269, 772, 156)
+uv = PackedVector2Array(721, 163, 636, 259, 697, 394, 671, 543, 720, 694, 1022, 764, 1329, 608, 1440, 357, 1378, 290, 1300, 298, 1223, 415, 1179, 559, 1003, 627, 809, 581, 780, 494, 813, 378, 719, 269, 772, 156)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-972, -666)
+polygon = PackedVector2Array(770, 154, 720, 164, 635, 261, 698, 395, 670, 545, 718, 692, 1023, 764, 1326, 612, 1441, 358, 1378, 290, 1300, 297, 1221, 421, 1178, 557, 1002, 629, 804, 581, 780, 494, 811, 375, 716, 267)
