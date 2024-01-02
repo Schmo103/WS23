@@ -211,7 +211,7 @@ func _on_animation_player_animation_finished(anim_name):
 			dying = false
 			death_position = position
 			emit_signal("player_died",self)
-			$death_label.visible = true
+			$player_ui/CanvasLayer/Control/death_label.visible = true
 			dead = true
 		if anim_name == "damage":
 			taking_dmg = false
