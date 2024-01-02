@@ -194,8 +194,9 @@ func animate(request):
 		if !taking_dmg:
 			animation_player.play("shoot")
 	elif request == "damage":
-		shooting = false
-		animation_player.play("damage")
+		if !dying:
+			shooting = false
+			animation_player.play("damage")
 	elif request == "RESET":
 		if !dying:
 			if !taking_dmg:
