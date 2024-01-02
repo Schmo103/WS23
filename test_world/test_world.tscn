@@ -1,20 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://qvwn68dd272c"]
+[gd_scene load_steps=8 format=3 uid="uid://qvwn68dd272c"]
 
 [ext_resource type="Script" path="res://test_world/test_world.gd" id="1_1506m"]
 [ext_resource type="PackedScene" uid="uid://bo3ntfkmhfw0m" path="res://test_world/wall_02.tscn" id="3_lpxf6"]
 [ext_resource type="PackedScene" uid="uid://din5d5slu2p0o" path="res://test_world/wall_03.tscn" id="4_57yda"]
 [ext_resource type="PackedScene" uid="uid://cecxluda21lcg" path="res://test_world/wall_04.tscn" id="5_jkrxo"]
-[ext_resource type="Shader" path="res://test_world/fog.gdshader" id="6_cb7ys"]
+[ext_resource type="PackedScene" uid="uid://dr3wchna0b4o2" path="res://test_world/fog.tscn" id="6_glwoe"]
 [ext_resource type="PackedScene" uid="uid://bnmi0nstf4jed" path="res://test_world/wall_05.tscn" id="6_xk3sv"]
-[ext_resource type="Texture2D" uid="uid://dgudtjkke8xci" path="res://test_world/smoke.jpg" id="7_cy0vf"]
 
 [sub_resource type="Environment" id="Environment_jrqow"]
 background_mode = 3
-ambient_light_energy = 16.0
+sdfgi_use_occlusion = true
 glow_enabled = true
-glow_intensity = 0.45
-glow_strength = 0.84
-glow_bloom = 0.17
+glow_intensity = 3.0
+glow_mix = 0.496
+glow_bloom = 0.02
 glow_blend_mode = 0
 fog_light_color = Color(0.380392, 0.737255, 1, 1)
 fog_sun_scatter = 1.5
@@ -27,16 +26,6 @@ volumetric_fog_emission_energy = 233.73
 volumetric_fog_gi_inject = 2.49
 volumetric_fog_length = 459.63
 adjustment_contrast = 1.15
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2nq6"]
-shader = ExtResource("6_cb7ys")
-shader_parameter/u_color = Vector3(0.35, 0.48, 0.95)
-shader_parameter/u_octaves = 4
-shader_parameter/u_scale = 0.282
-shader_parameter/u_uv_scale = 9.134
-shader_parameter/u_time_scale = Vector2(-0.5, 0.5)
-shader_parameter/u_final_scale = 0.385
-shader_parameter/u_mask = ExtResource("7_cy0vf")
 
 [node name="test_world" type="Node2D"]
 script = ExtResource("1_1506m")
@@ -178,7 +167,7 @@ offset_left = -30.0
 offset_top = -19.0
 offset_right = 10.0
 offset_bottom = 21.0
-color = Color(0, 0, 0.290196, 1)
+color = Color(0.423529, 0.917647, 1, 1)
 
 [node name="start_loc_2" type="Node2D" parent="."]
 position = Vector2(60, 260)
@@ -188,17 +177,26 @@ offset_left = -33.0
 offset_top = -22.0
 offset_right = 7.0
 offset_bottom = 18.0
-color = Color(0.278431, 0.0784314, 0.0156863, 1)
+color = Color(1, 0.180392, 0.686275, 1)
+
+[node name="respawn_loc" type="Node2D" parent="."]
+position = Vector2(3588, 609)
+
+[node name="ColorRect2" type="ColorRect" parent="respawn_loc"]
+offset_left = -33.0
+offset_top = -22.0
+offset_right = 7.0
+offset_bottom = 18.0
+color = Color(0.34902, 0.286275, 1, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jrqow")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_j2nq6")
-position = Vector2(646, 345.5)
-scale = Vector2(8.43125, 6.57813)
-texture = ExtResource("7_cy0vf")
+[node name="fogbomb" parent="." instance=ExtResource("6_glwoe")]
+visible = false
+z_index = 5
+position = Vector2(1302, 993)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
-color = Color(0.129412, 0.129412, 0.129412, 0.929412)
+color = Color(0.0235294, 0.0235294, 0.0235294, 0.929412)

@@ -1,0 +1,190 @@
+[gd_scene load_steps=20 format=3 uid="uid://ccm8ea2xqk3d1"]
+
+[ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="1_kflpi"]
+[ext_resource type="Texture2D" uid="uid://o7455badv5gs" path="res://shared/particles.png" id="2_avrer"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12549, 0.32549, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnhoy"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_667a7"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.262745, 0.380392, 0.933333, 1)
+border_color = Color(0.298039, 0.788235, 0.941176, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsw5c"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.188235, 0.447059, 0.545098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_egfui"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ltv7d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nr1xf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywlyk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x111"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ggeya"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3a5b6"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.231373, 0.231373, 0.239216, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqrgd"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.247059, 0.352941, 0.862745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5agy"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+border_color = Color(0.25098, 0.556863, 0.670588, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7410l"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb10s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcim6"]
+
+[sub_resource type="Theme" id="Theme_sy5ff"]
+Button/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_hover_pressed_color = Color(0.164706, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_kflpi")
+Button/styles/disabled = SubResource("StyleBoxFlat_qgnno")
+Button/styles/focus = SubResource("StyleBoxFlat_lnhoy")
+Button/styles/hover = SubResource("StyleBoxFlat_667a7")
+Button/styles/normal = SubResource("StyleBoxFlat_lnhoy")
+Button/styles/pressed = SubResource("StyleBoxFlat_hsw5c")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_egfui")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_ltv7d")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_nr1xf")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_ywlyk")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_4x111")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_ggeya")
+ColorPicker/constants/center_slider_grabbers = 12
+GDPanel/base_type = &"PanelContainer"
+GDPanel/styles/panel = SubResource("StyleBoxFlat_3a5b6")
+Label/colors/font_color = Color(0.447059, 0.0352941, 0.717647, 1)
+Label/fonts/font = ExtResource("1_kflpi")
+LineEdit/colors/caret_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/fonts/font = ExtResource("1_kflpi")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_rqrgd")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_w5agy")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_7410l")
+RichTextLabel/colors/default_color = Color(0.447059, 0.0352941, 0.717647, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_kflpi")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_eb10s")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tcim6")
+
+[node name="game_mode" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_sy5ff")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_avrer")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="game_mode" type="Label" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select a Game Mode"
+
+[node name="tut" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tutorial"
+
+[node name="solo" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Solo"
+
+[node name="online" type="Button" parent="PanelContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Online"

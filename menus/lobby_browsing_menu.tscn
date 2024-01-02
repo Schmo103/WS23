@@ -1,10 +1,147 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxv3um0nt0768"]
+[gd_scene load_steps=23 format=3 uid="uid://dxv3um0nt0768"]
 
 [ext_resource type="PackedScene" uid="uid://8qy4jenu2w1m" path="res://GD-SyncTemplates/LobbyBrowser/lobby_browser.tscn" id="1_dgkn0"]
 [ext_resource type="Script" path="res://menus/lobby_browsing_menu.gd" id="1_q6obi"]
-[ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="3_2opek"]
+[ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="2_ihdoi"]
 [ext_resource type="Script" path="res://menus/lobby_creator.gd" id="4_vxmqb"]
 [ext_resource type="Script" path="res://menus/lobby_joiner.gd" id="5_org80"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12549, 0.32549, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnhoy"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_667a7"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.262745, 0.380392, 0.933333, 1)
+border_color = Color(0.298039, 0.788235, 0.941176, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsw5c"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.188235, 0.447059, 0.545098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_egfui"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ltv7d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nr1xf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ywlyk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x111"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ggeya"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3a5b6"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.231373, 0.231373, 0.239216, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqrgd"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.247059, 0.352941, 0.862745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5agy"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+border_color = Color(0.25098, 0.556863, 0.670588, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7410l"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb10s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcim6"]
+
+[sub_resource type="Theme" id="Theme_sy5ff"]
+Button/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_hover_pressed_color = Color(0.164706, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("2_ihdoi")
+Button/styles/disabled = SubResource("StyleBoxFlat_qgnno")
+Button/styles/focus = SubResource("StyleBoxFlat_lnhoy")
+Button/styles/hover = SubResource("StyleBoxFlat_667a7")
+Button/styles/normal = SubResource("StyleBoxFlat_lnhoy")
+Button/styles/pressed = SubResource("StyleBoxFlat_hsw5c")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_egfui")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_ltv7d")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_nr1xf")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_ywlyk")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_4x111")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_ggeya")
+ColorPicker/constants/center_slider_grabbers = 12
+GDPanel/base_type = &"PanelContainer"
+GDPanel/styles/panel = SubResource("StyleBoxFlat_3a5b6")
+Label/colors/font_color = Color(0.447059, 0.0352941, 0.717647, 1)
+Label/fonts/font = ExtResource("2_ihdoi")
+LineEdit/colors/caret_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/fonts/font = ExtResource("2_ihdoi")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_rqrgd")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_w5agy")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_7410l")
+RichTextLabel/colors/default_color = Color(0.447059, 0.0352941, 0.717647, 1)
+RichTextLabel/fonts/normal_font = ExtResource("2_ihdoi")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_eb10s")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tcim6")
 
 [node name="LobbyBrowsingMenu" type="Control"]
 layout_mode = 3
@@ -22,7 +159,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LobbyBrowser"]
 layout_mode = 2
@@ -40,19 +177,19 @@ layout_mode = 2
 [node name="Join Manual" type="Button" parent="LobbyBrowser/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "JOIN MANUAL"
 
 [node name="CreateLobby" type="Button" parent="LobbyBrowser/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "CREATE LOBBY"
 
 [node name="Back" type="Button" parent="LobbyBrowser/VBoxContainer/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "BACK"
 
 [node name="LobbyCreator" type="PanelContainer" parent="."]
@@ -64,7 +201,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 script = ExtResource("4_vxmqb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LobbyCreator"]
@@ -147,13 +284,13 @@ alignment = 1
 [node name="Create" type="Button" parent="LobbyCreator/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "CREATE"
 
 [node name="Back" type="Button" parent="LobbyCreator/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "BACK"
 
 [node name="LobbyJoiner" type="PanelContainer" parent="."]
@@ -165,7 +302,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 script = ExtResource("5_org80")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LobbyJoiner"]
@@ -226,13 +363,13 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "JOIN"
 
 [node name="Back" type="Button" parent="LobbyJoiner/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
-theme = ExtResource("3_2opek")
+theme = SubResource("Theme_sy5ff")
 text = "BACK"
 
 [connection signal="join_pressed" from="LobbyBrowser/VBoxContainer/LobbyBrowser" to="." method="_on_lobby_browser_join_pressed"]

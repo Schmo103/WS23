@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://da7eev4n35k23"]
+
+[ext_resource type="Texture2D" uid="uid://o7455badv5gs" path="res://shared/particles.png" id="1_aiiri"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0ge1y"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ow2co"]
+_data = [Vector2(0, 1), 0.0, -0.255732, 0, 0, Vector2(0.837838, 0.282698), -3.39792, -3.39792, 0, 0, Vector2(1, 0), -0.293811, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xioyf"]
+curve = SubResource("Curve_ow2co")
+
+[sub_resource type="Curve" id="Curve_2c82x"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.611486, 0), -2.2644, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xis3h"]
+curve = SubResource("Curve_2c82x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jv74y"]
+direction = Vector3(100, 100, 100)
+spread = 180.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+alpha_curve = SubResource("CurveTexture_xioyf")
+emission_curve = SubResource("CurveTexture_xis3h")
+anim_offset_max = 1.0
+
+[node name="fragments" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_0ge1y")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_jv74y")
+texture = ExtResource("1_aiiri")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0

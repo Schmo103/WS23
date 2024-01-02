@@ -1,0 +1,174 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr3wchna0b4o2"]
+
+[ext_resource type="Script" path="res://test_world/fog.gd" id="1_8n4sp"]
+[ext_resource type="Shader" path="res://test_world/fog.gdshader" id="1_m1i1s"]
+[ext_resource type="Texture2D" uid="uid://dgudtjkke8xci" path="res://test_world/smoke.jpg" id="2_tnse8"]
+[ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="4_g4bsi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2nq6"]
+shader = ExtResource("1_m1i1s")
+shader_parameter/u_color = Vector3(2, 2, 2)
+shader_parameter/u_octaves = 8
+shader_parameter/u_scale = 0.459
+shader_parameter/u_uv_scale = 6.588
+shader_parameter/u_time_scale = Vector2(-0.5, 0.5)
+shader_parameter/u_final_scale = 0.5
+shader_parameter/u_modulate = Vector4(0.5, 0.5, 0.5, 1)
+shader_parameter/u_mask = ExtResource("2_tnse8")
+
+[sub_resource type="Animation" id="Animation_jmvy4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/u_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector4(0.5, 0.5, 0.5, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../fragments:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_551fh"]
+resource_name = "explode"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(3.1, 3.1), Vector2(3.3, 3.3), Vector2(2.5, 2.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/u_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector4(0.5, 0.5, 0.5, 0), Vector4(0.5, 0.5, 0.5, 2), Vector4(0.5, 0.5, 0.5, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../fragments:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0u8cs"]
+_data = {
+"RESET": SubResource("Animation_jmvy4"),
+"explode": SubResource("Animation_551fh")
+}
+
+[node name="fogbomb" type="Node2D"]
+scale = Vector2(0.997758, 0.970929)
+script = ExtResource("1_8n4sp")
+
+[node name="fog" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_j2nq6")
+texture = ExtResource("2_tnse8")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="fragments" parent="." instance=ExtResource("4_g4bsi")]
+emitting = true
+amount = 200
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../fog")
+libraries = {
+"": SubResource("AnimationLibrary_0u8cs")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

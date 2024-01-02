@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var scale_decay: Curve
+@export var bullet_damage = 5
 @export var distance_limit: float = 5.0
 
 @onready var area: Area2D = $Area2D
@@ -15,8 +15,6 @@ var shooter_name : String = ""
 
 func _ready():
 	GDSync.expose_func(queue_free)
-	$life_time.start()
-	
 
 
 func _multiplayer_ready() -> void:
@@ -26,6 +24,8 @@ func _multiplayer_ready() -> void:
 	look_at(global_position + velocity)
 	b_sound.pitch_scale = randfn(1.0, 0.1)
 	b_sound.play()
+	$life_time.start()
+	$fragments2.emitting = true
 	
 
 
@@ -54,24 +54,20 @@ func _on_life_time_timeout():
 func _on_area_2d_body_entered(body):
 	if body.name == shooter_name:
 		return
+	
+	if body.is_in_group("damageables"):
+		body.damage(bullet_damage)
 
-	# Check if the collided body is a wall (modify this condition accordingly)
-	if body.is_in_group("walls"):
-		# Get the collision point in local coordinates of the wall
-		var local_collision_point = body.to_local(area.global_position)
+	explode()
 
-		# Trigger point fracture at the collision point
-		perform_point_fracture(local_collision_point)
 
+
+
+func explode():
+	$fragments.emitting = true
+	$Polygon2D.visible = false
+	$PointLight2D.visible = false
+	$fragments2.visible = false
+
+func _on_fragments_finished():
 	destroy_bullet()
-
-# Add this function to perform point fracture
-func perform_point_fracture(fracture_point: Vector2) -> void:
-	# Instantiate the PolygonFracture script
-	var fracture_script = preload("res://polygon_fracture/PolygonFracture.gd").new()
-
-	# Call the point fracture method from PolygonFracture
-	fracture_script.point_fracture(fracture_point)
-
-	# Destroy the fracture script after use
-	fracture_script.queue_free()

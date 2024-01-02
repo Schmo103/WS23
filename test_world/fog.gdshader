@@ -21,6 +21,9 @@ uniform float u_final_scale : hint_range(0.1, 1.0) = 0.3;
 // Define the mask texture as a uniform variable
 uniform sampler2D u_mask;
 
+// Define the modulate color as a uniform variable
+uniform vec4 u_modulate;
+
 float rand(vec2 coord){
 	return fract(sin(dot(coord, vec2(7805, 7899)) * 1000.0) * 1000.0);
 }
@@ -63,5 +66,5 @@ void fragment() {
 	float mask = texture(u_mask, UV).r;
 
 	// Apply the mask to the final color
-	COLOR = vec4(u_color, final * u_final_scale * mask);
+	COLOR = vec4(u_color, final * u_final_scale * mask) * u_modulate;
 }

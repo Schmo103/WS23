@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://5whm1igkt23h"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://5whm1igkt23h"]
+
+[ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="1_r67eu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
 content_margin_left = 15.0
@@ -98,9 +100,23 @@ content_margin_right = 15.0
 content_margin_bottom = 15.0
 bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu7mf"]
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwtt0"]
+bg_color = Color(0.968627, 0.145098, 0.521569, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb10s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcim6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fevsm"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4up8"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_detail = 1
 
 [resource]
 Button/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
@@ -109,6 +125,7 @@ Button/colors/font_hover_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 Button/colors/font_hover_pressed_color = Color(0.164706, 1, 1, 1)
 Button/colors/font_pressed_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_r67eu")
 Button/styles/disabled = SubResource("StyleBoxFlat_qgnno")
 Button/styles/focus = SubResource("StyleBoxFlat_lnhoy")
 Button/styles/hover = SubResource("StyleBoxFlat_667a7")
@@ -124,10 +141,23 @@ ColorPicker/constants/center_slider_grabbers = 12
 GDPanel/base_type = &"PanelContainer"
 GDPanel/styles/panel = SubResource("StyleBoxFlat_3a5b6")
 Label/colors/font_color = Color(0.447059, 0.0352941, 0.717647, 1)
+Label/fonts/font = ExtResource("1_r67eu")
 LineEdit/colors/caret_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/fonts/font = ExtResource("1_r67eu")
 LineEdit/styles/focus = SubResource("StyleBoxFlat_rqrgd")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_w5agy")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_7410l")
+ProgressBar/colors/font_color = Color(0.188235, 0.447059, 0.545098, 1)
+ProgressBar/fonts/font = ExtResource("1_r67eu")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_wu7mf")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_hwtt0")
+RichTextLabel/colors/default_color = Color(0.447059, 0.0352941, 0.717647, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_r67eu")
 RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_eb10s")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tcim6")
+TextEdit/colors/caret_color = Color(0.188235, 0.447059, 0.545098, 1)
+TextEdit/colors/font_color = Color(0.447059, 0.0352941, 0.717647, 1)
+TextEdit/fonts/font = ExtResource("1_r67eu")
+TextEdit/styles/focus = SubResource("StyleBoxFlat_fevsm")
+TextEdit/styles/normal = SubResource("StyleBoxFlat_l4up8")
