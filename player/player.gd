@@ -170,11 +170,12 @@ func damage(dmg):
 	health -= dmg
 	new = health
 	if new <= min_health:
-		health = min_health
-		new = min_health
-		old = min_health
-		death()
-		#GDSync.call_func(death)
+		if !dying:
+			health = min_health
+			new = min_health
+			old = min_health
+			death()
+			#GDSync.call_func(death)
 	else:
 		health_changed.emit(name.to_int(), new)
 		taking_dmg = true
