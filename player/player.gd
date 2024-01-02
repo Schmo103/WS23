@@ -191,15 +191,11 @@ func animate(request):
 		if !shooting:
 			animation_player.play("walk")
 	elif request == "shoot":
-		if animation_player.current_animation == "damage":
-			animation_player.queue("shoot")
-		else:
+		if !taking_dmg:
 			animation_player.play("shoot")
 	elif request == "damage":
-		if animation_player.current_animation == "shoot":
-			animation_player.queue("damage")
-		else:
-			animation_player.play("damage")
+		shooting = false
+		animation_player.play("damage")
 	elif request == "RESET":
 		if !dying:
 			if !taking_dmg:
