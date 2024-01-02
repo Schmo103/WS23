@@ -282,6 +282,7 @@ func update_progress_bar():
 func respawn():
 	if GDSync.is_gdsync_owner(self):
 		dead = false
+		dying = false
 		$player_ui/CanvasLayer/Control/death_label.visible = false
 		health = full_health
 		new = full_health
