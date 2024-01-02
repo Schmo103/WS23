@@ -870,10 +870,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -347.0
-offset_top = -488.0
-offset_right = 390.0
-offset_bottom = -247.0
+offset_left = 184.0
+offset_top = 124.0
+offset_right = 921.0
+offset_bottom = 365.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_sy5ff")
@@ -895,6 +895,15 @@ theme = SubResource("Theme_sy5ff")
 theme_override_font_sizes/font_size = 50
 text = "press SPACE to respawn"
 
+[node name="cooldown_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="shoot_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Camera2D/shake_timer" to="Camera2D" method="_on_shake_timer_timeout"]
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

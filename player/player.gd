@@ -15,6 +15,9 @@ signal player_died(player)
 @export var cooldown_timer : float = 0.0
 @export var cooldown_factor : float = 2.0
 var overheated = false
+var weapon_charged = true
+
+@onready var cooldown_timer_node = $cooldown_timer
 
 @export var speed = 350
 @export var friction = 0.16
@@ -96,48 +99,82 @@ func _physics_process(delta):
 		$CollisionPolygon2D.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
 
 		move_and_slide()
+		#
+		#if !overheated:
+			#if !shooting:
+				#if Input.is_action_pressed("shoot"):
+					#if overheat_timer < overheat_time_limit:
+						##print("Shooting...")
+						#shoot()
+						#if !taking_dmg:
+							#overheat_timer += delta
+						#update_progress_bar()
+					##elif overheat_timer >= overheat_time_limit:
+						##print("Overheat limit reached.")
+						##if !overheated:
+							##overheat_timer = overheat_time_limit
+						##overheated = true
+						##$"player_ui/CanvasLayer/Control/overheated!".visible = true
+						##print("OVERHEATEDDDDDD")
+						##cooldown_timer_node.start(cooldown_time)
+				#else:
+					## Reverse overheat when not shooting
+					##print("Not shooting, decreasing overheat...")
+					#overheat_timer = max(0, overheat_timer - delta * cooldown_factor)
+					#update_progress_bar()
+			#else:
+				## Shooting, increase overheat timer
+				##print("Shooting, increasing overheat...")
+				#overheat_timer = min(overheat_time_limit, overheat_timer + delta)
+				#update_progress_bar()
+		#
+	#if overheat_timer >= overheat_time_limit:
+		#print("Overheat limit reached.")
+		#if !overheated:
+			#overheat_timer = overheat_time_limit
+		#overheated = true
+		#$"player_ui/CanvasLayer/Control/overheated!".visible = true
+		#print("OVERHEATEDDDDDD")
+		#cooldown_timer_node.start(cooldown_time)
+	#print(str(overheat_timer))
+		##if overheated and cooldown_timer <= 0:
+			##cooldown_timer = cooldown_time
+		##if overheated and cooldown_timer <= 0.1:
+			##overheated = false
+			##overheat_timer = 0
+			##$"player_ui/CanvasLayer/Control/overheated!".visible = false
+			##print("COOLDOWN SUCCESS 1")
+##
+		### Cooldown logic
+		##if cooldown_timer > 0:
+			###print("Starting cooldown...")
+			##cooldown_timer = max(0, cooldown_timer - delta)
+			##update_progress_bar()
+		#
+		#
+		
+		if Input.is_action_pressed("shoot") and !overheated and !shooting and weapon_charged:
+			shoot()
+		#if !overheated and !weapon_charged:
+			#overheat_timer = min(overheat_time_limit, overheat_timer + delta)
+		#if !overheated and weapon_charged:
+			#overheat_timer = max(0, overheat_timer - delta)
 		if !overheated:
-			if !shooting:
-				if Input.is_action_pressed("shoot"):
-					if overheat_timer < overheat_time_limit:
-						#print("Shooting...")
-						shoot()
-						overheat_timer += delta
-						update_progress_bar()
-					elif overheat_timer >= overheat_time_limit:
-						print("Overheat limit reached.")
-						if !overheated:
-							overheat_timer = overheat_time_limit
-						overheated = true
-						$"player_ui/CanvasLayer/Control/overheated!".visible = true
-						print("OVERHEATEDDDDDD")
-				else:
-					# Reverse overheat when not shooting
-					#print("Not shooting, decreasing overheat...")
-					overheat_timer = max(0, overheat_timer - delta * cooldown_factor)
-					update_progress_bar()
+			if weapon_charged:
+				overheat_timer = max(0, overheat_timer - delta)
 			else:
-				# Shooting, increase overheat timer
-				#print("Shooting, increasing overheat...")
 				overheat_timer = min(overheat_time_limit, overheat_timer + delta)
-				update_progress_bar()
-
-		if overheat_timer >= overheat_time_limit and cooldown_timer <= 0:
-			cooldown_timer = cooldown_time
-		if overheated and cooldown_timer <= 0.1:
-			overheated = false
+		
+		if overheat_timer >= overheat_time_limit:
+			overheated = true
+			$"player_ui/CanvasLayer/Control/overheated!".visible = true
+			cooldown_timer_node.start(cooldown_time)
 			overheat_timer = 0
-			$"player_ui/CanvasLayer/Control/overheated!".visible = false
-			print("COOLDOWN SUCCESS")
+		
+		update_progress_bar()
+		shooting = false
+		
 
-		# Cooldown logic
-		if cooldown_timer > 0:
-			print("Starting cooldown...")
-			cooldown_timer = max(0, cooldown_timer - delta * cooldown_factor)
-			update_progress_bar()
-		else:
-			overheated = false
-			print("COOLDOWN SUCCESS")
 
 var shooting = false
 func shoot() -> void:
@@ -159,6 +196,8 @@ func shoot() -> void:
 	bullet.global_position = origin
 	Global.emit_signal("walk_screen_shake")
 	animate("shoot")
+	weapon_charged = false
+	$shoot_timer.start()
 
 
 
@@ -217,9 +256,9 @@ func _on_animation_player_animation_finished(anim_name):
 			dead = true
 		if anim_name == "damage":
 			taking_dmg = false
-		if anim_name == "shoot":
-			shooting = false
-			update_progress_bar()
+		#if anim_name == "shoot":
+			#shooting = false
+			##update_progress_bar()
 
 
 func update_progress_bar():
@@ -259,3 +298,15 @@ func pause():
 
 func unpause():
 	paused = false
+
+
+func _on_cooldown_timer_timeout():
+	overheated = false
+	overheat_timer = 0
+	$"player_ui/CanvasLayer/Control/overheated!".visible = false
+	print("cooldown_timer_timeout")
+
+
+func _on_shoot_timer_timeout():
+	weapon_charged = true
+	#print("weapon charged")
