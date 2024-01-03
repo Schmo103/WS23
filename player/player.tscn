@@ -156,13 +156,13 @@ RichTextLabel/fonts/normal_font = ExtResource("6_lfst8")
 RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_eb10s")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tcim6")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5dcr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twx14"]
 shader = ExtResource("7_n2wyh")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a5hge"]
-atlas = ExtResource("2_jqu0l")
-region = Rect2(-47.9072, 20.6475, 826.192, 376.98)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aj5qm"]
+shader = ExtResource("7_n2wyh")
+shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="Animation" id="Animation_hsw0d"]
 length = 0.001
@@ -301,19 +301,19 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("visuals/dmg_flash:material:shader_parameter/hit_opacity")
+tracks/11/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("visuals/dmg_flash:visible")
+tracks/12/path = NodePath("overheat_p:emitting")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -325,26 +325,26 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
+tracks/13/path = NodePath("visuals/skin_1:material:shader_parameter/hit_opacity")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [0.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("overheat_p:emitting")
+tracks/14/path = NodePath("visuals/skin_2:material:shader_parameter/hit_opacity")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_h8g03"]
@@ -353,19 +353,19 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("visuals/dmg_flash:visible")
+tracks/0/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/dmg_flash:material:shader_parameter/hit_opacity")
+tracks/1/path = NodePath("visuals/skin_1:material:shader_parameter/hit_opacity")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -377,14 +377,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
+tracks/2/path = NodePath("visuals/skin_2:material:shader_parameter/hit_opacity")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [0.0, 1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_j5bxi"]
@@ -520,30 +520,6 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 5.0, 0.0]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("visuals/dmg_flash:material:shader_parameter/hit_opacity")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("visuals/dmg_flash:visible")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_oh0ac"]
@@ -836,6 +812,7 @@ rotation = 0.16057
 scale = Vector2(0.15, 0.15)
 
 [node name="skin_1" type="Polygon2D" parent="visuals"]
+material = SubResource("ShaderMaterial_twx14")
 offset = Vector2(-460, -220)
 texture = ExtResource("2_jqu0l")
 polygon = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817.021, 425.532)
@@ -843,6 +820,7 @@ uv = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817
 
 [node name="skin_2" type="Polygon2D" parent="visuals"]
 visible = false
+material = SubResource("ShaderMaterial_aj5qm")
 position = Vector2(-0.950226, -1.27876)
 rotation = -0.0647286
 scale = Vector2(1.18084, 1.33484)
@@ -850,13 +828,6 @@ offset = Vector2(-2110.85, -213.182)
 texture = ExtResource("2_jqu0l")
 polygon = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
 uv = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
-
-[node name="dmg_flash" type="Sprite2D" parent="visuals"]
-visible = false
-material = SubResource("ShaderMaterial_k5dcr")
-position = Vector2(-86.9353, -13.3977)
-scale = Vector2(1.03706, 1.05872)
-texture = SubResource("AtlasTexture_a5hge")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false

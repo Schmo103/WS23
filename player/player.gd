@@ -23,7 +23,7 @@ signal player_died(player)
 
 @export var full_health = 85
 @export var health = 85
-@export var min_health = 20
+@export var min_health = 0
 @export var danger_health = 30
 
 @onready var skin_1 = $visuals/skin_1
@@ -85,8 +85,8 @@ func get_input():
 func _physics_process(delta):
 	if !GDSync.is_gdsync_owner(self): return
 	
-	if !GDSync.is_host():
-		shoot()
+	#if !GDSync.is_host():
+		#shoot()
 	
 	if dead:
 		if Input.is_action_just_pressed("respawn"):
@@ -100,7 +100,8 @@ func _physics_process(delta):
 				animate("walk")
 			else:
 				velocity = velocity.lerp(Vector2.ZERO, friction)
-				animate("RESET")  # Stop the animation
+				if !overheated:
+					animate("RESET")  # Stop the animation
 			
 			# Add rotation towards the mouse
 			var mouse_pos = get_global_mouse_position()
@@ -128,6 +129,7 @@ func _physics_process(delta):
 				cooldown_timer_node.start(cooldown_time)
 				overheat_timer = 0
 				$overheat_sound.play()
+				animate("overheat")
 			
 			update_progress_bar()
 			shooting = false
@@ -172,9 +174,9 @@ func damage(dmg):
 				low_health = true
 				private_animate("low_health")
 		else:
-			health_changed.emit(name.to_int(), new)
 			taking_dmg = true
 			animate("damage")
+		health_changed.emit(name.to_int(), new)
 		print("client id: ", GDSync.get_client_id(),", health: ", health)
 
 func death():
@@ -192,27 +194,30 @@ func animate(request):
 	elif !dying:
 		if request == "walk":
 			if !shooting:
-				animation_player.play("walk")
+				if !overheated:
+					animation_player.play("walk")
 		elif request == "shoot":
 			if !taking_dmg:
 				shooting = true
 				animation_player.play("shoot")
 		elif request == "damage":
-			if low_health:
-				shooting = false
-				animation_player.play("damage")
-			else:
-				shooting = false
-				animation_player.play("damage")
+			shooting = false
+			animation_player.play("damage")
 		elif request == "overheat":
 			animation_player.play("overheat")
-	elif request == "RESET":
-		if !dying:
+		elif request == "RESET":
 			if !taking_dmg:
 				if !shooting:
 					if !overheated:
-						animation_player.play("RESET")  # Stop the animation
-
+						animation_player.play("RESET")  # Stop the animation'
+					else:
+						print("cant play RESET because of overheat true")
+	if GDSync.is_host():
+		if request == "overheated":
+			print("host current request: ", request, "!")
+			print("host current animation: ", animation_player.current_animation)
+			print("host variables: dying: ", dying, ", taking_dmg: ", taking_dmg, ", shooting: ", shooting, ", overheated: ", overheated, ", dead: ", dead)
+			#assert(request == animation_player.current_animation, request)
 
 func private_animate(request):
 	if !GDSync.is_gdsync_owner(self): return
@@ -263,11 +268,12 @@ func respawn():
 		health = full_health
 		new = full_health
 		old = full_health
+		$pos_sync.pause_interpolation(0.1)
 		position = death_position
 		health_changed.emit(name.to_int(), new)
 		taking_dmg = false
 		animate("RESET")
-		#private_animate("full_health")
+		private_animate("full_health")
 
 func _on_cooldown_timer_timeout():
 	overheated = false
