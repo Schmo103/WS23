@@ -9,8 +9,8 @@ script = ExtResource("1_37t4k")
 
 [node name="menu_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_je12o")
-volume_db = -45.725
+volume_db = -15.69
 
 [node name="test_lvl_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_bh846")
-volume_db = -41.241
+volume_db = -13.897

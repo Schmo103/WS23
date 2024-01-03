@@ -14,8 +14,6 @@ signal player_died(player)
 @export var cooldown_time : float = 5
 @export var cooldown_timer : float = 0.0
 @export var cooldown_factor : float = 3.0
-var overheated = false
-var weapon_charged = true
 
 @onready var cooldown_timer_node = $cooldown_timer
 
@@ -26,11 +24,27 @@ var weapon_charged = true
 @export var full_health = 85
 @export var health = 85
 @export var min_health = 20
+@export var danger_health = 30
 
 @onready var skin_1 = $visuals/skin_1
 @onready var skin_2 = $visuals/skin_2
 @onready var animation_player = $public_animations  # Reference to the AnimationPlayer node
 @onready var p_animation_player = $private_animations
+
+var overheated = false
+var weapon_charged = true
+
+var shooting = false
+
+var old
+var new
+var taking_dmg = false
+var low_health = false
+
+var dying = false
+
+var dead = false
+var death_position
 
 
 func _ready():
@@ -48,7 +62,6 @@ func _ready():
 	GDSync.expose_func(damage)
 	#GDSync.expose_func(death)
 	set_multiplayer_data.call_deferred()
-
 
 func set_multiplayer_data():
 	var client_id : int = name.to_int()
@@ -69,67 +82,57 @@ func get_input():
 		input.y -= 1
 	return input
 
-
 func _physics_process(delta):
 	if !GDSync.is_gdsync_owner(self): return
 	
-	#print("Overheat Timer:", overheat_timer)
-	#print("Cooldown Timer:", cooldown_timer)
-	#print("Shooting:", shooting)
-	
-	if Input.is_action_just_pressed("pause"):
-		if !paused:
-			pause()
-		else:
-			unpause()
+	if !GDSync.is_host():
+		shoot()
 	
 	if dead:
 		if Input.is_action_just_pressed("respawn"):
 			respawn()
 	
 	if !dead:
-		var direction = get_input()
-		if direction.length() > 0:
-			velocity = velocity.lerp(direction.normalized() * speed, acceleration)
-			animate("walk")
-		else:
-			velocity = velocity.lerp(Vector2.ZERO, friction)
-			animate("RESET")  # Stop the animation
-		
-		# Add rotation towards the mouse
-		var mouse_pos = get_global_mouse_position()
-		var angle_to_mouse = position.angle_to_point(mouse_pos)
-		$visuals.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
-		$CollisionPolygon2D.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
-
-		move_and_slide()
-		
-		if Input.is_action_pressed("shoot") and !overheated and !shooting and weapon_charged:
-			shoot()
-		#if !overheated and !weapon_charged:
-			#overheat_timer = min(overheat_time_limit, overheat_timer + delta)
-		#if !overheated and weapon_charged:
-			#overheat_timer = max(0, overheat_timer - delta)
-		if !overheated:
-			if weapon_charged:
-				overheat_timer = max(0, overheat_timer - delta)
+		if !dying:
+			var direction = get_input()
+			if direction.length() > 0:
+				velocity = velocity.lerp(direction.normalized() * speed, acceleration)
+				animate("walk")
 			else:
-				overheat_timer = min(overheat_time_limit, overheat_timer + delta)
-		
-		if overheat_timer >= overheat_time_limit:
-			overheated = true
-			$"player_ui/CanvasLayer/Control/overheated!".visible = true
-			cooldown_timer_node.start(cooldown_time)
-			overheat_timer = 0
-			$overheat_sound.play()
-		
-		update_progress_bar()
-		shooting = false
-		
+				velocity = velocity.lerp(Vector2.ZERO, friction)
+				animate("RESET")  # Stop the animation
+			
+			# Add rotation towards the mouse
+			var mouse_pos = get_global_mouse_position()
+			var angle_to_mouse = position.angle_to_point(mouse_pos)
+			$visuals.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
+			$CollisionPolygon2D.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
 
+			move_and_slide()
+			
+			if Input.is_action_pressed("shoot") and !overheated and !shooting and weapon_charged:
+				shoot()
+			#if !overheated and !weapon_charged:
+				#overheat_timer = min(overheat_time_limit, overheat_timer + delta)
+			#if !overheated and weapon_charged:
+				#overheat_timer = max(0, overheat_timer - delta)
+			if !overheated:
+				if weapon_charged:
+					overheat_timer = max(0, overheat_timer - delta * cooldown_factor)
+				else:
+					overheat_timer = min(overheat_time_limit, overheat_timer + delta)
+			
+			if overheat_timer >= overheat_time_limit:
+				overheated = true
+				$"player_ui/CanvasLayer/Control/overheated!".visible = true
+				cooldown_timer_node.start(cooldown_time)
+				overheat_timer = 0
+				$overheat_sound.play()
+			
+			update_progress_bar()
+			shooting = false
 
-var shooting = false
-func shoot() -> void:
+func shoot():
 	shooting = true
 #	Instantiate a bullet using the NodeInstantiator
 #	The NodeInstantiator will automatically spawn it on all other clients
@@ -151,65 +154,65 @@ func shoot() -> void:
 	weapon_charged = false
 	$shoot_timer.start()
 
-
-
-var old
-var new
-var taking_dmg = false
-var low_health = false
 func damage(dmg):
-	print("damage taken: ",dmg)
-	old = health
-	health -= dmg
-	new = health
-	if new <= min_health:
-		if !dying:
+	if !GDSync.is_gdsync_owner(self): return
+	if !dying:
+		print("client id: ",GDSync.get_client_id(),", damage taken: ",dmg)
+		old = health
+		health -= dmg
+		new = health
+		if new <= min_health:
 			health = min_health
 			new = min_health
 			old = min_health
 			death()
 			#GDSync.call_func(death)
-	if health <= 30:
-		if !low_health:
-			low_health = true
-			private_animate("low_health")
-	else:
-		health_changed.emit(name.to_int(), new)
-		taking_dmg = true
-		animate("damage")
+		if health <= danger_health:
+			if !low_health:
+				low_health = true
+				private_animate("low_health")
+		else:
+			health_changed.emit(name.to_int(), new)
+			taking_dmg = true
+			animate("damage")
+		print("client id: ", GDSync.get_client_id(),", health: ", health)
 
-var dying = false
 func death():
 	if GDSync.is_gdsync_owner(self):
-		animation_player.play("death")
 		dying = true
+		animate("death")
 		private_animate("full_health")
+		print("client id: ", GDSync.get_client_id(), " just DIED with ", health, " health")
 
 func animate(request):
 	if !GDSync.is_gdsync_owner(self): return
-	if request == "walk":
-		if !shooting:
-			animation_player.play("walk")
-	elif request == "shoot":
-		if !taking_dmg:
-			animation_player.play("shoot")
-	elif request == "damage":
-		if !dying:
+	if request == "death":
+		dying = true
+		animation_player.play("death")
+	elif !dying:
+		if request == "walk":
+			if !shooting:
+				animation_player.play("walk")
+		elif request == "shoot":
+			if !taking_dmg:
+				shooting = true
+				animation_player.play("shoot")
+		elif request == "damage":
 			if low_health:
 				shooting = false
-				animation_player.queue("damage")
+				animation_player.play("damage")
 			else:
 				shooting = false
 				animation_player.play("damage")
-	elif request == "overheat":
-		animation_player.queue("overheat")
+		elif request == "overheat":
+			animation_player.play("overheat")
 	elif request == "RESET":
 		if !dying:
 			if !taking_dmg:
 				if !shooting:
 					if !overheated:
 						animation_player.play("RESET")  # Stop the animation
-	#animation_player.queue(request)
+
 
 func private_animate(request):
 	if !GDSync.is_gdsync_owner(self): return
@@ -218,9 +221,6 @@ func private_animate(request):
 	if request == "full_health":
 		p_animation_player.play("full_health")
 
-
-var dead = false
-var death_position
 func _on_animation_player_animation_finished(anim_name):
 	if GDSync.is_gdsync_owner(self):
 		if anim_name == "death":
@@ -234,7 +234,6 @@ func _on_animation_player_animation_finished(anim_name):
 		#if anim_name == "shoot":
 			#shooting = false
 			##update_progress_bar()
-
 
 func update_progress_bar():
 	var progress_value = 0.0
@@ -270,17 +269,6 @@ func respawn():
 		animate("RESET")
 		#private_animate("full_health")
 
-
-var paused = false
-func pause():
-	paused = true
-	
-
-func unpause():
-	paused = false
-	
-
-
 func _on_cooldown_timer_timeout():
 	overheated = false
 	overheat_timer = 0
@@ -288,11 +276,6 @@ func _on_cooldown_timer_timeout():
 	#print("cooldown_timer_timeout")
 	$cooldown_sound.play()
 
-
 func _on_shoot_timer_timeout():
 	weapon_charged = true
 	#print("weapon charged")
-
-
-func _on_resume_pressed():
-	unpause()

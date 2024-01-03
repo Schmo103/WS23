@@ -225,6 +225,7 @@ text = "Lobby Name"
 [node name="LobbyName" type="LineEdit" parent="LobbyCreator/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "test_lobby"
 
 [node name="Spacer1" type="Control" parent="LobbyCreator/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)

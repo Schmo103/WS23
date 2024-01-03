@@ -217,6 +217,7 @@ horizontal_alignment = 1
 [node name="Username" type="LineEdit" parent="PanelContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "test_player"
 
 [node name="Spacer1" type="Control" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
