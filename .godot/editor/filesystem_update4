@@ -29,3 +29,6 @@ res://menus/lobby.gd
 res://pause_menu.gd
 res://pause_menu.tscn
 res://global.tscn
+res://global.gd
+res://test_world/test_world.gd
+res://player/Camera2D.gd

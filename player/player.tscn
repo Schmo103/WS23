@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cn5vis7la5wml"]
+[gd_scene load_steps=46 format=3 uid="uid://cn5vis7la5wml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
 [ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="12_o3axa"]
 [ext_resource type="Texture2D" uid="uid://b1pj7nifoymuw" path="res://player/health_low.png" id="13_h2toq"]
 [ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="17_gglwy"]
+[ext_resource type="AudioStream" uid="uid://cchj6oemyptwq" path="res://sound/minigun_overheat-84899.mp3" id="18_a5iym"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
 content_margin_left = 15.0
@@ -971,6 +972,15 @@ one_shot = true
 [node name="shoot_timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="overheat_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_a5iym")
+volume_db = 24.0
+
+[node name="cooldown_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_a5iym")
+volume_db = 24.0
+pitch_scale = 10.0
 
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
 [connection signal="animation_finished" from="public_animations" to="." method="_on_animation_player_animation_finished"]

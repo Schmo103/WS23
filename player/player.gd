@@ -121,6 +121,7 @@ func _physics_process(delta):
 			$"player_ui/CanvasLayer/Control/overheated!".visible = true
 			cooldown_timer_node.start(cooldown_time)
 			overheat_timer = 0
+			$overheat_sound.play()
 		
 		update_progress_bar()
 		shooting = false
@@ -282,6 +283,7 @@ func _on_cooldown_timer_timeout():
 	overheat_timer = 0
 	$"player_ui/CanvasLayer/Control/overheated!".visible = false
 	print("cooldown_timer_timeout")
+	$cooldown_sound.play()
 
 
 func _on_shoot_timer_timeout():

@@ -13,7 +13,7 @@ extends Camera2D
 @onready var shake_intensity = 0 
 var default_offset = offset
 
-@export var walk_shake_intensity = 11
+@export var walk_shake_intensity = 15
 
 ################################################################################
 ## Functions ##

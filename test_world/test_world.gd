@@ -3,6 +3,10 @@ extends Node2D
 
 var PLAYER_SCENE : PackedScene = load("res://player/player.tscn")
 
+func _ready():
+	Global.main_menu_music("off")
+	Global.test_level_music("on")
+
 func _enter_tree():
 #	Connect all relevant signals. Make sure to handle disconnects!
 	GDSync.client_joined.connect(client_joined)
