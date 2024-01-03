@@ -1,0 +1,211 @@
+[gd_scene load_steps=22 format=3 uid="uid://5brffqm0sw7v"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_tv5en"]
+[ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="1_v6vhn"]
+[ext_resource type="PackedScene" uid="uid://dgbv7r0yrg4yk" path="res://GD-SyncTemplates/TextChat/text_chat.tscn" id="2_b1f6w"]
+[ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="3_dctjw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_un0gx"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12549, 0.32549, 0.4, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5405"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a0ro"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.262745, 0.380392, 0.933333, 1)
+border_color = Color(0.298039, 0.788235, 0.941176, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7www"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.188235, 0.447059, 0.545098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkxok"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4b1j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5i3na"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1lplm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gpdp7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfhux"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tye3"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.231373, 0.231373, 0.239216, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1gwm"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.247059, 0.352941, 0.862745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfhny"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.447059, 0.0352941, 0.717647, 1)
+border_color = Color(0.25098, 0.556863, 0.670588, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f57qa"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pd0gg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfuqm"]
+
+[sub_resource type="Theme" id="Theme_ga86c"]
+Button/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/colors/font_hover_pressed_color = Color(0.164706, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_v6vhn")
+Button/styles/disabled = SubResource("StyleBoxFlat_un0gx")
+Button/styles/focus = SubResource("StyleBoxFlat_x5405")
+Button/styles/hover = SubResource("StyleBoxFlat_6a0ro")
+Button/styles/normal = SubResource("StyleBoxFlat_x5405")
+Button/styles/pressed = SubResource("StyleBoxFlat_s7www")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_tkxok")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_m4b1j")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_5i3na")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_1lplm")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_gpdp7")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_kfhux")
+ColorPicker/constants/center_slider_grabbers = 12
+GDPanel/base_type = &"PanelContainer"
+GDPanel/styles/panel = SubResource("StyleBoxFlat_8tye3")
+Label/colors/font_color = Color(0.447059, 0.0352941, 0.717647, 1)
+Label/fonts/font = ExtResource("1_v6vhn")
+LineEdit/colors/caret_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/colors/font_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+LineEdit/fonts/font = ExtResource("1_v6vhn")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_n1gwm")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_hfhny")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_f57qa")
+RichTextLabel/colors/default_color = Color(0.447059, 0.0352941, 0.717647, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_v6vhn")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_pd0gg")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tfuqm")
+
+[node name="pause_menu" type="Node"]
+script = ExtResource("1_tv5en")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="pause_menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatContainer" type="VBoxContainer" parent="CanvasLayer/pause_menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/pause_menu/ChatContainer"]
+layout_mode = 2
+theme = SubResource("Theme_ga86c")
+text = "Chat"
+horizontal_alignment = 1
+
+[node name="TextChat" parent="CanvasLayer/pause_menu/ChatContainer" instance=ExtResource("2_b1f6w")]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+open_action_name = "open_chat"
+cancel_action_name = "pause"
+
+[node name="main_menu" type="Button" parent="CanvasLayer/pause_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 114.0
+offset_right = 117.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_dctjw")
+text = "Leave Game"
+
+[node name="resume" type="Button" parent="CanvasLayer/pause_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 51.0
+offset_right = 114.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_dctjw")
+text = "Resume"
+
+[connection signal="pressed" from="CanvasLayer/pause_menu/main_menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/pause_menu/resume" to="." method="_on_resume_pressed"]

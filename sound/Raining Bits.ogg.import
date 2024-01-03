@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://caom2aeegeaam"
+path="res://.godot/imported/Raining Bits.ogg-263b0382f7957110637fb467c524daac.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/Raining Bits.ogg"
+dest_files=["res://.godot/imported/Raining Bits.ogg-263b0382f7957110637fb467c524daac.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

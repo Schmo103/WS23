@@ -23,3 +23,9 @@ res://godot_retro_shaders/AccurateCRT.gdshader
 res://godot_retro_shaders/flash.gdshader
 res://player/bullet.gd
 res://player/player_ui.gd
+res://GD-SyncTemplates/TextChat/text_chat.tscn
+res://GD-SyncTemplates/TextChat/text_chat.gd
+res://menus/lobby.gd
+res://pause_menu.gd
+res://pause_menu.tscn
+res://global.tscn

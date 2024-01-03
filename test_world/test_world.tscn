@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qvwn68dd272c"]
+[gd_scene load_steps=9 format=3 uid="uid://qvwn68dd272c"]
 
 [ext_resource type="Script" path="res://test_world/test_world.gd" id="1_1506m"]
 [ext_resource type="PackedScene" uid="uid://bo3ntfkmhfw0m" path="res://test_world/wall_02.tscn" id="3_lpxf6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cecxluda21lcg" path="res://test_world/wall_04.tscn" id="5_jkrxo"]
 [ext_resource type="PackedScene" uid="uid://dr3wchna0b4o2" path="res://test_world/fog.tscn" id="6_glwoe"]
 [ext_resource type="PackedScene" uid="uid://bnmi0nstf4jed" path="res://test_world/wall_05.tscn" id="6_xk3sv"]
+[ext_resource type="PackedScene" uid="uid://5brffqm0sw7v" path="res://pause_menu.tscn" id="7_k4tg4"]
 
 [sub_resource type="Environment" id="Environment_jrqow"]
 background_mode = 3
@@ -200,3 +201,5 @@ position = Vector2(1302, 993)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0.0235294, 0.0235294, 0.0235294, 0.929412)
+
+[node name="pause_menu" parent="." instance=ExtResource("7_k4tg4")]

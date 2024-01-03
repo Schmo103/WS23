@@ -27,7 +27,7 @@ config/icon="res://extra_assets/icon.svg"
 [autoload]
 
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
-Global="*res://global.gd"
+Global="*res://global.tscn"
 
 [debug]
 
@@ -46,6 +46,7 @@ folder_colors={
 "res://addons/": "green",
 "res://extra_assets/": "yellow",
 "res://player/": "purple",
+"res://sound/": "pink",
 "res://test_world/": "gray"
 }
 

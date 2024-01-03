@@ -9,7 +9,7 @@ func _ready():
 	GDSync.expose_func(update_display)
 	if !GDSync.is_gdsync_owner(self): health_display.visible = false
 	if !GDSync.is_gdsync_owner(self): overheat_display.visible = false
-	#$CanvasLayer/Control/health_low.set_modulate(Color(255.0,255.0,255.0,0.0))
+	
 
 func update_display(new):
 	health_display.value = new

@@ -180,7 +180,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_sy5ff")
 bbcode_enabled = true
-text = "[Channel][Username] Test message"
+text = "[Username] Test message"
 fit_content = true
 scroll_active = false
 scroll_following = true
@@ -197,5 +197,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_av620")
+placeholder_text = "enter to chat..."
 
 [connection signal="text_changed" from="PanelContainer/VBoxContainer/TypingContainer/TextEdit" to="." method="_on_text_changed"]

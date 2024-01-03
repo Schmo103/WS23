@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://h6w4eqhhmn3s"]
+
+[ext_resource type="AudioStream" uid="uid://bxp7djm3fqfae" path="res://sound/n-Dimensions (Main Theme - Retro Ver.mp3" id="1_bh846"]
+
+[node name="global" type="Node2D"]
+
+[node name="menu_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_bh846")
+autoplay = true

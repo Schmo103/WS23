@@ -1,14 +1,15 @@
+AudioStreamPlayer2D
 Control
+CanvasLayer
+Node
 Button
 CharacterBody2D
 Timer
 Label
-Node
 ProgressBar
 TextureRect
 Sprite2D
 WorldEnvironment
 TextureProgressBar
 Node2D
-CanvasLayer
 VBoxContainer
