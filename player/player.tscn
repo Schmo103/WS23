@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cn5vis7la5wml"]
+[gd_scene load_steps=47 format=3 uid="uid://cn5vis7la5wml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
 [ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
@@ -333,6 +333,18 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("overheat_p:emitting")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_h8g03"]
@@ -707,6 +719,46 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_7s8tg"]
+resource_name = "overheat"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("overheat_p:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jegl2"]
 _data = {
 "RESET": SubResource("Animation_hsw0d"),
@@ -714,6 +766,7 @@ _data = {
 "death": SubResource("Animation_j5bxi"),
 "full_health": SubResource("Animation_oh0ac"),
 "low_health": SubResource("Animation_4s2cl"),
+"overheat": SubResource("Animation_7s8tg"),
 "shoot": SubResource("Animation_r4bfc"),
 "walk": SubResource("Animation_66wf3")
 }
@@ -813,6 +866,10 @@ polygon = PackedVector2Array(180, -190, 200, -190, 310, 160, 290, 180, -440, 90,
 
 [node name="fragments" parent="." instance=ExtResource("12_o3axa")]
 amount = 100
+lifetime = 1.0
+speed_scale = 2.5
+
+[node name="overheat_p" parent="." instance=ExtResource("12_o3axa")]
 lifetime = 1.0
 speed_scale = 2.5
 
@@ -980,7 +1037,7 @@ volume_db = 24.0
 [node name="cooldown_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
 volume_db = 24.0
-pitch_scale = 10.0
+pitch_scale = 6.0
 
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
 [connection signal="animation_finished" from="public_animations" to="." method="_on_animation_player_animation_finished"]

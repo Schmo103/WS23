@@ -201,11 +201,14 @@ func animate(request):
 			else:
 				shooting = false
 				animation_player.play("damage")
+	elif request == "overheat":
+		animation_player.queue("overheat")
 	elif request == "RESET":
 		if !dying:
 			if !taking_dmg:
 				if !shooting:
-					animation_player.play("RESET")  # Stop the animation
+					if !overheated:
+						animation_player.play("RESET")  # Stop the animation
 	#animation_player.queue(request)
 
 func private_animate(request):
@@ -282,7 +285,7 @@ func _on_cooldown_timer_timeout():
 	overheated = false
 	overheat_timer = 0
 	$"player_ui/CanvasLayer/Control/overheated!".visible = false
-	print("cooldown_timer_timeout")
+	#print("cooldown_timer_timeout")
 	$cooldown_sound.play()
 
 
