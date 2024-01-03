@@ -64,6 +64,7 @@ func _on_area_2d_body_entered(body):
 
 
 func explode():
+	$Area2D/CollisionPolygon2D.call_deferred("set_disabled", true)
 	$fragments.emitting = true
 	$Polygon2D.visible = false
 	$PointLight2D.visible = false

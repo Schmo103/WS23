@@ -29,9 +29,13 @@ var weapon_charged = true
 
 @onready var skin_1 = $visuals/skin_1
 @onready var skin_2 = $visuals/skin_2
-@onready var animation_player = $AnimationPlayer  # Reference to the AnimationPlayer node
+@onready var animation_player = $public_animations  # Reference to the AnimationPlayer node
+@onready var p_animation_player = $private_animations
+
 
 func _ready():
+	if !GDSync.is_gdsync_owner(self): $player_ui/CanvasLayer/Control/health_low.visible = false
+	if !GDSync.is_gdsync_owner(self): $player_ui/CanvasLayer/Control/damage.visible = false
 	if GDSync.is_gdsync_owner(self):
 		skin_1.visible = true
 		skin_2.visible = false
@@ -204,7 +208,9 @@ func shoot() -> void:
 var old
 var new
 var taking_dmg = false
+var low_health = false
 func damage(dmg):
+	print("damage taken: ",dmg)
 	old = health
 	health -= dmg
 	new = health
@@ -215,6 +221,10 @@ func damage(dmg):
 			old = min_health
 			death()
 			#GDSync.call_func(death)
+	if health <= 30:
+		if !low_health:
+			low_health = true
+			private_animate("low_health")
 	else:
 		health_changed.emit(name.to_int(), new)
 		taking_dmg = true
@@ -227,6 +237,7 @@ func death():
 		dying = true
 
 func animate(request):
+	if !GDSync.is_gdsync_owner(self): return
 	if request == "walk":
 		if !shooting:
 			animation_player.play("walk")
@@ -235,14 +246,26 @@ func animate(request):
 			animation_player.play("shoot")
 	elif request == "damage":
 		if !dying:
-			shooting = false
-			animation_player.play("damage")
+			if low_health:
+				shooting = false
+				animation_player.queue("damage")
+			else:
+				shooting = false
+				animation_player.play("damage")
 	elif request == "RESET":
 		if !dying:
 			if !taking_dmg:
 				if !shooting:
 					animation_player.play("RESET")  # Stop the animation
 	#animation_player.queue(request)
+
+func private_animate(request):
+	if !GDSync.is_gdsync_owner(self): return
+	if request == "low_health":
+		p_animation_player.play("low_health")
+	if request == "full_health":
+		p_animation_player.play("full_health")
+
 
 var dead = false
 var death_position
@@ -283,22 +306,27 @@ func respawn():
 	if GDSync.is_gdsync_owner(self):
 		dead = false
 		dying = false
+		low_health = false
 		$player_ui/CanvasLayer/Control/death_label.visible = false
+		#$player_ui/CanvasLayer/Control/TextureRect.visible = false
 		health = full_health
 		new = full_health
 		old = full_health
 		position = death_position
 		health_changed.emit(name.to_int(), new)
 		taking_dmg = false
-		animation_player.play("RESET")
+		animate("RESET")
+		private_animate("full_health")
 
 
 var paused = false
 func pause():
 	paused = true
+	%pause_menu.visible = true
 
 func unpause():
 	paused = false
+	%pause_menu.visible = false
 
 
 func _on_cooldown_timer_timeout():
