@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="1_ghasw"]
 [ext_resource type="Script" path="res://player/bullet.gd" id="1_wm5ir"]
 [ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="3_mp2cq"]
-[ext_resource type="AudioStream" uid="uid://c4sov3rk4vrso" path="res://sound/Digital_SFX_Set/laser5.mp3" id="4_h84r7"]
+[ext_resource type="AudioStream" uid="uid://dxkhd3bykol3w" path="res://sound/Digital_SFX_Set/laser2.mp3" id="4_p5kyt"]
 [ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="4_q6cyl"]
 [ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="5_us27s"]
 
@@ -15,7 +15,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_ow2co"]
-_data = [Vector2(0, 1), 0.0, -1.78406, 0, 0, Vector2(0.518293, 0), 0.336003, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -1.78406, 0, 0, Vector2(1, 0), -0.50588, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_xioyf"]
@@ -35,8 +35,6 @@ spread = 0.0
 initial_velocity_min = 2000.0
 initial_velocity_max = 2000.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.15
-scale_max = 0.15
 color = Color(0, 1, 1, 1)
 alpha_curve = SubResource("CurveTexture_xioyf")
 emission_curve = SubResource("CurveTexture_xis3h")
@@ -85,7 +83,7 @@ polygon = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826
 uv = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826, 2257.97, 1110.15, 2378.26, 1052.17, 2504.35, 714.493, 2321.74, 402.899)
 
 [node name="bullet_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_h84r7")
+stream = ExtResource("4_p5kyt")
 volume_db = 10.0
 autoplay = true
 
@@ -109,9 +107,9 @@ scale = Vector2(1.3, 1.3)
 emitting = true
 process_material = SubResource("ParticleProcessMaterial_syjhq")
 texture = SubResource("CompressedTexture2D_docq5")
-lifetime = 0.25
 one_shot = false
 explosiveness = 0.0
+local_coords = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="life_time" to="." method="_on_life_time_timeout"]

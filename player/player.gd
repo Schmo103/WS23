@@ -13,8 +13,8 @@ signal player_died(player)
 
 @export var overheat_time_limit : float = 2.5
 @export var overheat_timer : float = 0.0
-@export var cooldown_time : float = 5
-@export var snipe_cooldown_time : float = 1
+@export var cooldown_time : float = 3.5
+@export var snipe_cooldown_time : float = 2.5
 @export var cooldown_timer : float = 0.0
 @export var cooldown_factor : float = 3.0
 
