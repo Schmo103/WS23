@@ -1,4 +1,4 @@
-res://global.tscn
+res://player/player.tscn
 res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres
 res://godot_retro_shaders/flash.gdshader
 res://test_world/fog.gdshader
@@ -11,13 +11,18 @@ res://godot_retro_shaders/Aditional Shaders/B&W.gdshader
 res://godot_retro_shaders/Glitch.gdshader
 res://godot_retro_shaders/Aditional Shaders/Blur.gdshader
 res://godot_retro_shaders/AccurateCRT.gdshader
-res://player/player.tscn
 res://test_world/test_world.tscn
 res://menus/main_menu.tscn
 res://menus/lobby.tscn
 res://GD-SyncTemplates/TextChat/text_chat.tscn
 res://pause_menu.tscn
-res://player/bullet.tscn
-res://player/player.gd
+res://global.tscn
+res://menus/lobby.gd
+res://menus/player_customization_menu.gd
 res://menus/player_customization_menu.tscn
-res://menus/lobby_browsing_menu.tscn
+res://player/sniper_bullet.tscn
+res://player/player.gd
+res://player/bullet.gd
+res://player/bullet.tscn
+res://player/sniper_bullet.gd
+res://test_world/fragments.tscn

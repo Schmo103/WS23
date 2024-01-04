@@ -32,6 +32,7 @@ adjustment_contrast = 1.15
 script = ExtResource("1_1506m")
 
 [node name="background" type="ColorRect" parent="."]
+z_index = -15
 offset_left = -6121.0
 offset_top = -4558.0
 offset_right = 7025.0

@@ -1,10 +1,10 @@
+Timer
 AudioStreamPlayer2D
 Control
 CanvasLayer
 Node
 Button
 CharacterBody2D
-Timer
 Label
 ProgressBar
 TextureRect

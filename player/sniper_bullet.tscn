@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://drj0ifc10u6lf"]
+
+[ext_resource type="Script" path="res://player/sniper_bullet.gd" id="1_8l2gy"]
+[ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_dq5at"]
+[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="3_yita5"]
+[ext_resource type="AudioStream" uid="uid://bah1823vc57wt" path="res://sound/Digital_SFX_Set/laser1.mp3" id="4_8t56u"]
+[ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="5_ga4ah"]
+[ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="6_4crjp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w2n1l"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ow2co"]
+_data = [Vector2(0, 1), 0.0, -1.78406, 0, 0, Vector2(1, 0), -0.290203, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xioyf"]
+curve = SubResource("Curve_ow2co")
+
+[sub_resource type="Curve" id="Curve_2c82x"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, -13.1949, 0, 0, Vector2(1e-05, 9.74968), 0.0, 0.0, 0, 0, Vector2(0.0321543, 2.40693), 0.0, 0.0, 0, 0, Vector2(0.938907, 0.0988446), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_xis3h"]
+curve = SubResource("Curve_2c82x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvyem"]
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 2000.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+color = Color(1, 0.145098, 1, 1)
+alpha_curve = SubResource("CurveTexture_xioyf")
+emission_curve = SubResource("CurveTexture_xis3h")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rt7ce"]
+load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
+
+[node name="sniper_bullet" type="Node2D"]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_8l2gy")
+
+[node name="PropertySynchronizer" type="Node" parent="."]
+script = ExtResource("2_dq5at")
+broadcast = 3
+refresh_rate = 60
+node_path = NodePath("..")
+property_name = "position"
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="PropertySynchronizer2" type="Node" parent="."]
+script = ExtResource("2_dq5at")
+broadcast = 3
+refresh_rate = 20
+node_path = NodePath("..")
+property_name = "rotation"
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-39.9986, 391.002)
+rotation = 1.40794
+polygon = PackedVector2Array(-520.873, -166.658, -288.405, -594.629, -206.728, -104.906, -360.781, -133.597)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-70, 400)
+rotation = 1.40794
+offset = Vector2(-2315.84, -745.919)
+texture = ExtResource("3_yita5")
+polygon = PackedVector2Array(2028.03, 123.012, 1772.58, 567.475, 1810.76, 1445.28, 2145.93, 638.956)
+uv = PackedVector2Array(2002.13, 334.043, 1672.34, 551.064, 1885.11, 1057.45, 2202.13, 629.787)
+
+[node name="bullet_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8t56u")
+volume_db = 15.0
+autoplay = true
+
+[node name="life_time" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = -5
+position = Vector2(-70, -40)
+rotation = 1.5708
+energy = 2.01
+blend_mode = 2
+texture = ExtResource("5_ga4ah")
+texture_scale = 1.1
+
+[node name="explode" parent="." instance=ExtResource("6_4crjp")]
+amount = 24
+lifetime = 6.0
+
+[node name="fragments2" parent="." instance=ExtResource("6_4crjp")]
+material = SubResource("CanvasItemMaterial_w2n1l")
+position = Vector2(-26.6667, 0)
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_mvyem")
+texture = SubResource("CompressedTexture2D_rt7ce")
+lifetime = 1.0
+one_shot = false
+speed_scale = 4.62
+explosiveness = 0.0
+randomness = 0.78
+
+[node name="trail_start_time" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="life_time" to="." method="_on_life_time_timeout"]
+[connection signal="finished" from="explode" to="." method="_on_explode_finished"]
+[connection signal="finished" from="fragments2" to="." method="_on_fragments_finished"]
+[connection signal="timeout" from="trail_start_time" to="." method="_on_trail_start_time_timeout"]

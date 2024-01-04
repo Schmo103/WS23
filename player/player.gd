@@ -6,12 +6,15 @@ signal player_died(player)
 
 
 @export var bullet_speed = 15000.0
+@onready var snipe_bullet_speed = bullet_speed * 2
 
 @onready var b_instantiator : Node = $bullet_instantiator
+@onready var snipe_b_instantiator : Node = $snipe_bullet_instantiator
 
 @export var overheat_time_limit : float = 2.5
 @export var overheat_timer : float = 0.0
 @export var cooldown_time : float = 5
+@export var snipe_cooldown_time : float = 1
 @export var cooldown_timer : float = 0.0
 @export var cooldown_factor : float = 3.0
 
@@ -46,16 +49,17 @@ var dying = false
 var dead = false
 var death_position
 
+var player_class
 
 func _ready():
 	if !GDSync.is_gdsync_owner(self): $player_ui/CanvasLayer/Control/health_low.visible = false
 	if !GDSync.is_gdsync_owner(self): $player_ui/CanvasLayer/Control/damage.visible = false
-	if GDSync.is_gdsync_owner(self):
-		skin_1.visible = true
-		skin_2.visible = false
-	else:
+	if player_class == "auto":
 		skin_1.visible = false
 		skin_2.visible = true
+	elif player_class == "sniper":
+		skin_1.visible = true
+		skin_2.visible = false
 	
 	
 	
@@ -66,6 +70,7 @@ func _ready():
 func set_multiplayer_data():
 	var client_id : int = name.to_int()
 	$user_label.text = GDSync.get_player_data(client_id, "Username", "Unkown")
+	player_class = GDSync.get_player_data(client_id,"class")
 	if !GDSync.is_gdsync_owner(self): return
 	print("player client id is: =")
 	print(client_id)
@@ -110,29 +115,52 @@ func _physics_process(delta):
 			$CollisionPolygon2D.rotation = angle_to_mouse - PI +0.13  # Adjust the rotation
 
 			move_and_slide()
-			
-			if Input.is_action_pressed("shoot") and !overheated and !shooting and weapon_charged:
-				shoot()
-			#if !overheated and !weapon_charged:
-				#overheat_timer = min(overheat_time_limit, overheat_timer + delta)
-			#if !overheated and weapon_charged:
-				#overheat_timer = max(0, overheat_timer - delta)
-			if !overheated:
-				if weapon_charged:
-					overheat_timer = max(0, overheat_timer - delta * cooldown_factor)
-				else:
-					overheat_timer = min(overheat_time_limit, overheat_timer + delta)
-			
-			if overheat_timer >= overheat_time_limit:
-				overheated = true
-				$"player_ui/CanvasLayer/Control/overheated!".visible = true
-				cooldown_timer_node.start(cooldown_time)
-				overheat_timer = 0
-				$overheat_sound.play()
-				animate("overheat")
-			
-			update_progress_bar()
-			shooting = false
+			if player_class == "auto":
+				if Input.is_action_pressed("shoot") and !overheated and !shooting and weapon_charged:
+					shoot()
+				if !overheated:
+					if weapon_charged:
+						overheat_timer = max(0, overheat_timer - delta * cooldown_factor)
+					else:
+						overheat_timer = min(overheat_time_limit, overheat_timer + delta)
+				
+				if overheat_timer >= overheat_time_limit:
+					overheated = true
+					$"player_ui/CanvasLayer/Control/overheated!".visible = true
+					cooldown_timer_node.start(cooldown_time)
+					overheat_timer = 0
+					$overheat_sound.play()
+					animate("overheat")
+				
+				update_progress_bar()
+				shooting = false
+			elif player_class == "sniper":
+				# Sniper code
+				if Input.is_action_pressed("shoot") and not overheated and not shooting and weapon_charged:
+					# The player must hold down the "shoot" button for sniper
+					if not shooting:
+						shooting = true
+						snipe()  # Call the snipe function when shooting starts
+				elif shooting:
+					# Stop shooting and trigger overheat when the shoot button is released
+					shooting = false
+					overheated = true
+					$"player_ui/CanvasLayer/Control/overheated!".visible = true
+					cooldown_timer_node.start(snipe_cooldown_time)
+					overheat_timer = 0
+					$overheat_sound.play()
+					animate("overheat")
+
+				# Overheat right after snipe() is called
+				if shooting and overheat_timer >= overheat_time_limit:
+					overheated = true
+					$"player_ui/CanvasLayer/Control/overheated!".visible = true
+					cooldown_timer_node.start(cooldown_time)
+					overheat_timer = 0
+					$overheat_sound.play()
+					animate("overheat")
+
+				update_progress_bar()
 
 func shoot():
 	shooting = true
@@ -149,12 +177,32 @@ func shoot():
 	var angle_to_mouse = position.angle_to_point(mouse_pos)
 	# Convert the angle to a Vector2 and multiply by bullet_speed
 	bullet.velocity = Vector2.RIGHT.rotated(angle_to_mouse) * bullet_speed
-	bullet.distance_limit = 14.0
 	bullet.global_position = origin
 	Global.emit_signal("walk_screen_shake")
 	animate("shoot")
 	weapon_charged = false
 	$shoot_timer.start()
+
+func snipe():
+	shooting = true
+#	Instantiate a bullet using the NodeInstantiator
+#	The NodeInstantiator will automatically spawn it on all other clients
+	var bullet : Node = snipe_b_instantiator.instantiate_node()
+	
+#	Set all bullet properties. The NodeInstantiator will automatically detect
+#	all changes made to the bullet in this frame and synchronize them
+	bullet.shooter_name = name
+	var origin := global_position + Vector2.UP
+	# Add rotation towards the mouse
+	var mouse_pos = get_global_mouse_position()
+	var angle_to_mouse = position.angle_to_point(mouse_pos)
+	# Convert the angle to a Vector2 and multiply by bullet_speed
+	bullet.velocity = Vector2.RIGHT.rotated(angle_to_mouse) * snipe_bullet_speed
+	bullet.global_position = origin
+	Global.emit_signal("walk_screen_shake")
+	animate("shoot")
+	weapon_charged = false
+	$snipe_timer.start()
 
 func damage(dmg):
 	if !GDSync.is_gdsync_owner(self): return
@@ -285,3 +333,7 @@ func _on_cooldown_timer_timeout():
 func _on_shoot_timer_timeout():
 	weapon_charged = true
 	#print("weapon charged")
+
+
+func _on_snipe_timer_timeout():
+	weapon_charged = true

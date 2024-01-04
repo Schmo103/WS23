@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@export var bullet_damage = 10
+@export var bullet_damage = 100
 
 
 @onready var area: Area2D = $Area2D
@@ -48,6 +48,7 @@ func destroy_bullet():
 
 
 func _on_life_time_timeout():
+	print("life out")
 	destroy_bullet()
 
 
@@ -65,10 +66,17 @@ func _on_area_2d_body_entered(body):
 
 func explode():
 	$Area2D/CollisionPolygon2D.call_deferred("set_disabled", true)
-	$fragments.emitting = true
+	$explode.emitting = true
 	$Polygon2D.visible = false
 	$PointLight2D.visible = false
 	$fragments2.visible = false
 
-func _on_fragments_finished():
+
+
+func _on_explode_finished():
+	print("fragments finished")
 	destroy_bullet()
+
+
+func _on_trail_start_time_timeout():
+	$fragments2.emitting = true

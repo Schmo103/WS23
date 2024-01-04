@@ -36,7 +36,15 @@ func client_joined(client_id : int):
 	label.text = GDSync.get_player_data(client_id, "Username", "Unkown")
 	
 #	Get their color using their Client ID. Give an optional fallback for if "Color" does not exist
-	label.modulate = GDSync.get_player_data(client_id, "Color", Color.WHITE)
+	var player_class = GDSync.get_player_data(client_id, "class")
+	if player_class == "auto":
+		label.text = str(label.text, " | Class: Auto")
+	elif player_class == "sniper":
+		label.text = str(label.text, " | Class: Sniper")
+	elif player_class == "heavy":
+		label.text = str(label.text, " | Class: Heavy")
+	else:
+		label.text = str(label.text, " | Class: None")
 	
 #	Update the current player count display
 	%PlayerCount.text = str(GDSync.get_lobby_player_count())+"/"+str(GDSync.get_lobby_player_limit())

@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://cn5vis7la5wml"]
+[gd_scene load_steps=48 format=3 uid="uid://cn5vis7la5wml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
 [ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_v68i0"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="3_hdoig"]
+[ext_resource type="PackedScene" uid="uid://drj0ifc10u6lf" path="res://player/sniper_bullet.tscn" id="4_6ks7v"]
 [ext_resource type="PackedScene" uid="uid://b7kne16op4siw" path="res://player/bullet.tscn" id="4_b7xsc"]
 [ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="6_lfst8"]
 [ext_resource type="Texture2D" uid="uid://4fqketung4vb" path="res://player/under.png" id="6_rhayi"]
@@ -761,6 +762,13 @@ target_location = null
 scene = ExtResource("4_b7xsc")
 sync_starting_changes = true
 
+[node name="snipe_bullet_instantiator" type="Node" parent="."]
+script = ExtResource("3_hdoig")
+spawn_type = 1
+target_location = null
+scene = ExtResource("4_6ks7v")
+sync_starting_changes = true
+
 [node name="rot_sync2" type="Node" parent="."]
 script = ExtResource("2_v68i0")
 broadcast = 2
@@ -1001,13 +1009,14 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="snipe_timer" type="Timer" parent="."]
+one_shot = true
+
 [node name="overheat_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
-volume_db = 24.0
 
 [node name="cooldown_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
-volume_db = 24.0
 pitch_scale = 6.0
 
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
@@ -1016,3 +1025,4 @@ pitch_scale = 6.0
 [connection signal="timeout" from="Camera2D/shake_timer" to="Camera2D" method="_on_shake_timer_timeout"]
 [connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="snipe_timer" to="." method="_on_snipe_timer_timeout"]
