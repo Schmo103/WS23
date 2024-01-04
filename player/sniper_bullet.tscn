@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://drj0ifc10u6lf"]
+[gd_scene load_steps=21 format=3 uid="uid://drj0ifc10u6lf"]
 
 [ext_resource type="Script" path="res://player/sniper_bullet.gd" id="1_8l2gy"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_dq5at"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="5_ga4ah"]
 [ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="6_4crjp"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w2n1l"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uhnnk"]
 blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 8
@@ -15,19 +15,58 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_ow2co"]
-_data = [Vector2(0, 1), 0.0, -1.78406, 0, 0, Vector2(1, 0), -0.290203, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 1), 0.0, -0.255732, 0, 0, Vector2(0.837838, 0.282698), -3.39792, -3.39792, 0, 0, Vector2(1, 0), -0.293811, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_xioyf"]
 curve = SubResource("Curve_ow2co")
 
 [sub_resource type="Curve" id="Curve_2c82x"]
 max_value = 10.0
-_data = [Vector2(0, 10), 0.0, -13.1949, 0, 0, Vector2(1e-05, 9.74968), 0.0, 0.0, 0, 0, Vector2(0.0321543, 2.40693), 0.0, 0.0, 0, 0, Vector2(0.938907, 0.0988446), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.611486, 0), -2.2644, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_xis3h"]
 curve = SubResource("Curve_2c82x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s67jm"]
+angle_max = 195.0
+direction = Vector3(-1, 0, 0)
+spread = 110.0
+initial_velocity_min = 5000.0
+initial_velocity_max = 5000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+color = Color(1, 0.647059, 1, 1)
+alpha_curve = SubResource("CurveTexture_xioyf")
+emission_curve = SubResource("CurveTexture_xis3h")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fp165"]
+load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w2n1l"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_2i4by"]
+_data = [Vector2(0, 1), 0.0, -1.78406, 0, 0, Vector2(1, 0), -0.290203, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3xkv1"]
+curve = SubResource("Curve_2i4by")
+
+[sub_resource type="Curve" id="Curve_mw8pj"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, -13.1949, 0, 0, Vector2(1e-05, 9.74968), 0.0, 0.0, 0, 0, Vector2(0.0321543, 2.40693), 0.0, 0.0, 0, 0, Vector2(0.938907, 0.0988446), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_mi11w"]
+curve = SubResource("Curve_mw8pj")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mvyem"]
 direction = Vector3(-1, 0, 0)
@@ -35,19 +74,20 @@ spread = 0.0
 initial_velocity_min = 2000.0
 initial_velocity_max = 2000.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.2
+scale_min = 2.0
+scale_max = 2.0
 color = Color(1, 0.145098, 1, 1)
-alpha_curve = SubResource("CurveTexture_xioyf")
-emission_curve = SubResource("CurveTexture_xis3h")
+alpha_curve = SubResource("CurveTexture_3xkv1")
+emission_curve = SubResource("CurveTexture_mi11w")
 anim_offset_max = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rt7ce"]
 load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
 
 [node name="sniper_bullet" type="Node2D"]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.11, 0.11)
 script = ExtResource("1_8l2gy")
+bullet_damage = 55
 
 [node name="PropertySynchronizer" type="Node" parent="."]
 script = ExtResource("2_dq5at")
@@ -101,13 +141,18 @@ texture = ExtResource("5_ga4ah")
 texture_scale = 1.1
 
 [node name="explode" parent="." instance=ExtResource("6_4crjp")]
-amount = 24
-lifetime = 6.0
+material = SubResource("CanvasItemMaterial_uhnnk")
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_s67jm")
+texture = SubResource("CompressedTexture2D_fp165")
+visibility_rect = Rect2(-2601.01, -2597.86, 5181.77, 5247.1)
 
 [node name="fragments2" parent="." instance=ExtResource("6_4crjp")]
+visible = false
 material = SubResource("CanvasItemMaterial_w2n1l")
-position = Vector2(-26.6667, 0)
-amount = 60
+position = Vector2(227.273, 0)
+emitting = true
+amount = 30
 process_material = SubResource("ParticleProcessMaterial_mvyem")
 texture = SubResource("CompressedTexture2D_rt7ce")
 lifetime = 1.0
@@ -115,6 +160,7 @@ one_shot = false
 speed_scale = 4.62
 explosiveness = 0.0
 randomness = 0.78
+local_coords = true
 
 [node name="trail_start_time" type="Timer" parent="."]
 wait_time = 0.25

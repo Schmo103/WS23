@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://lpl5jj1xai2x"
+path="res://.godot/imported/hq-explosion-6288 (1).mp3-0dceaa3dd2750c0a68f8c03bd283828f.mp3str"
+
+[deps]
+
+source_file="res://sound/hq-explosion-6288 (1).mp3"
+dest_files=["res://.godot/imported/hq-explosion-6288 (1).mp3-0dceaa3dd2750c0a68f8c03bd283828f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

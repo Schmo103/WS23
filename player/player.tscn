@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cn5vis7la5wml"]
+[gd_scene load_steps=56 format=3 uid="uid://cn5vis7la5wml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
 [ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b1pj7nifoymuw" path="res://player/health_low.png" id="13_h2toq"]
 [ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="17_gglwy"]
 [ext_resource type="AudioStream" uid="uid://cchj6oemyptwq" path="res://sound/minigun_overheat-84899.mp3" id="18_a5iym"]
+[ext_resource type="AudioStream" uid="uid://lpl5jj1xai2x" path="res://sound/hq-explosion-6288 (1).mp3" id="20_ye057"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
 content_margin_left = 15.0
@@ -164,6 +165,43 @@ shader_parameter/hit_opacity = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aj5qm"]
 shader = ExtResource("7_n2wyh")
 shader_parameter/hit_opacity = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3b41t"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ow2co"]
+_data = [Vector2(0, 1), 0.0, -0.255732, 0, 0, Vector2(0.837838, 0.282698), -3.39792, -3.39792, 0, 0, Vector2(1, 0), -0.293811, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xioyf"]
+curve = SubResource("Curve_ow2co")
+
+[sub_resource type="Curve" id="Curve_2c82x"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.611486, 0), -2.2644, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xis3h"]
+curve = SubResource("Curve_2c82x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2u6mu"]
+direction = Vector3(100, 100, 100)
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 1250.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+alpha_curve = SubResource("CurveTexture_xioyf")
+emission_curve = SubResource("CurveTexture_xis3h")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4teek"]
+load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
 
 [sub_resource type="Animation" id="Animation_hsw0d"]
 length = 0.001
@@ -347,6 +385,18 @@ tracks/14/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("death:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_h8g03"]
 resource_name = "damage"
@@ -390,6 +440,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_j5bxi"]
 resource_name = "death"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -397,7 +448,7 @@ tracks/0/path = NodePath("visuals/skin_1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
@@ -409,7 +460,7 @@ tracks/1/path = NodePath("visuals/skin_1:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.0]
@@ -421,7 +472,7 @@ tracks/2/path = NodePath("visuals/skin_1:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.693683, 0.748293), Vector2(4.36509, 3.27748)]
@@ -433,7 +484,7 @@ tracks/3/path = NodePath("visuals/skin_1:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 0.4),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -445,7 +496,7 @@ tracks/4/path = NodePath("fragments:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -457,7 +508,7 @@ tracks/5/path = NodePath("visuals/skin_2:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876)]
@@ -469,7 +520,7 @@ tracks/6/path = NodePath("visuals/skin_2:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-0.0647286, -0.0647286, -0.0647286]
@@ -481,7 +532,7 @@ tracks/7/path = NodePath("visuals/skin_2:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1.18084, 1.33484), Vector2(0.824113, 1.03329), Vector2(4.36006, 4.57391)]
@@ -493,7 +544,7 @@ tracks/8/path = NodePath("visuals/skin_2:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.2, 0.4),
+"times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -505,7 +556,7 @@ tracks/9/path = NodePath("PointLight2D:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -517,10 +568,22 @@ tracks/10/path = NodePath("PointLight2D:energy")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0.2, 0.3, 0.6),
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 5.0, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("death:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_oh0ac"]
@@ -844,7 +907,10 @@ scale = Vector2(0.15, 0.15)
 polygon = PackedVector2Array(180, -190, 200, -190, 310, 160, 290, 180, -440, 90, -450, 60)
 
 [node name="fragments" parent="." instance=ExtResource("12_o3axa")]
+material = SubResource("CanvasItemMaterial_3b41t")
 amount = 100
+process_material = SubResource("ParticleProcessMaterial_2u6mu")
+texture = SubResource("CompressedTexture2D_4teek")
 lifetime = 1.0
 speed_scale = 2.5
 
@@ -1018,6 +1084,13 @@ stream = ExtResource("18_a5iym")
 [node name="cooldown_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
 pitch_scale = 6.0
+
+[node name="death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_ye057")
+volume_db = -15.0
+pitch_scale = 2.0
+
+[node name="respawn" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
 [connection signal="animation_finished" from="public_animations" to="." method="_on_animation_player_animation_finished"]

@@ -41,6 +41,7 @@ scale = Vector2(0.982087, 1.0051)
 color = Color(0.054902, 0.054902, 0.054902, 1)
 
 [node name="environment" type="Node2D" parent="."]
+z_index = -10
 
 [node name="walls" type="Node2D" parent="environment"]
 position = Vector2(-1004, -442)

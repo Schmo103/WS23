@@ -45,7 +45,7 @@ load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd
 
 [node name="bullet" type="Node2D"]
 z_index = -1
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.15, 0.15)
 script = ExtResource("1_wm5ir")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
