@@ -20,7 +20,7 @@ func _enter_tree():
 func disconnected():
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")
 
-var players = []
+
 
 func client_joined(client_id : int):
 #	Instantiate a player
@@ -29,12 +29,16 @@ func client_joined(client_id : int):
 #	Make the ID their name for easy identification
 	player.name = str(client_id)
 	add_child(player)
-	players.append(player)
+	Global.players.append(player)
 	player.player_died.connect(_on_player_died)
-	if GDSync.is_host():
-		player.position = $start_loc_1.position
-	else:
-		player.position = $start_loc_2.position
+	if Global.t1 == client_id:
+		player.position = $spawn1.position
+	elif Global.t2 == client_id:
+		player.position = $spawn2.position
+	elif Global.t3 == client_id:
+		player.position = $spawn3.position
+	elif Global.t4 == client_id:
+		player.position = $spawn4.position
 	
 #	Make sure to make the client the owner of their own player controller
 	GDSync.set_gdsync_owner(player, client_id)
@@ -46,7 +50,7 @@ func client_left(client_id : int):
 		get_node(player_string).queue_free()
 
 func _on_player_died(player):
-	player.position = $respawn_loc.position
+	player.position = $respawn.position
 
 
 

@@ -1,17 +1,18 @@
-[gd_scene load_steps=56 format=3 uid="uid://cn5vis7la5wml"]
+[gd_scene load_steps=69 format=3 uid="uid://cn5vis7la5wml"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_nlfmk"]
-[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="2_jqu0l"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_v68i0"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/NodeInstantiator.gd" id="3_hdoig"]
 [ext_resource type="PackedScene" uid="uid://drj0ifc10u6lf" path="res://player/sniper_bullet.tscn" id="4_6ks7v"]
 [ext_resource type="PackedScene" uid="uid://b7kne16op4siw" path="res://player/bullet.tscn" id="4_b7xsc"]
+[ext_resource type="PackedScene" uid="uid://cnk16tk8mgaig" path="res://player/bomb.tscn" id="5_nlqpa"]
 [ext_resource type="FontFile" uid="uid://bucyx536lvrvh" path="res://menus/conthrax-sb.otf" id="6_lfst8"]
 [ext_resource type="Texture2D" uid="uid://4fqketung4vb" path="res://player/under.png" id="6_rhayi"]
 [ext_resource type="Texture2D" uid="uid://nqvnobn3hc5p" path="res://player/over.png" id="7_c1wfx"]
 [ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="7_e0nhq"]
 [ext_resource type="Shader" path="res://godot_retro_shaders/flash.gdshader" id="7_n2wyh"]
 [ext_resource type="Texture2D" uid="uid://cdkcva8ilmeb2" path="res://player/progress.png" id="8_c1gio"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="8_e74mq"]
 [ext_resource type="Script" path="res://player/player_ui.gd" id="8_klr6c"]
 [ext_resource type="Script" path="res://player/Camera2D.gd" id="10_nxw7h"]
 [ext_resource type="Texture2D" uid="uid://cwtgmu1jd73m4" path="res://player/damage.png" id="12_10chr"]
@@ -19,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b1pj7nifoymuw" path="res://player/health_low.png" id="13_h2toq"]
 [ext_resource type="Theme" uid="uid://5whm1igkt23h" path="res://addons/GD-Sync/UI/ConfigMenu/GD-Theme.tres" id="17_gglwy"]
 [ext_resource type="AudioStream" uid="uid://cchj6oemyptwq" path="res://sound/minigun_overheat-84899.mp3" id="18_a5iym"]
-[ext_resource type="AudioStream" uid="uid://lpl5jj1xai2x" path="res://sound/hq-explosion-6288 (1).mp3" id="20_ye057"]
+[ext_resource type="AudioStream" uid="uid://lpl5jj1xai2x" path="res://sound/hq-explosion-6288 (1).mp3" id="19_1u3v4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgnno"]
 content_margin_left = 15.0
@@ -158,13 +159,11 @@ RichTextLabel/fonts/normal_font = ExtResource("6_lfst8")
 RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_eb10s")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_tcim6")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_twx14"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfide"]
 shader = ExtResource("7_n2wyh")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aj5qm"]
-shader = ExtResource("7_n2wyh")
-shader_parameter/hit_opacity = 0.0
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i58ck"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3b41t"]
 blend_mode = 1
@@ -203,195 +202,196 @@ anim_offset_max = 1.0
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4teek"]
 load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iq7ye"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_auo66"]
+_data = [Vector2(0, 1), 0.0, -0.255732, 0, 0, Vector2(0.837838, 0.282698), -3.39792, -3.39792, 0, 0, Vector2(1, 0), -0.293811, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gbxxq"]
+curve = SubResource("Curve_auo66")
+
+[sub_resource type="Curve" id="Curve_v4rg1"]
+max_value = 10.0
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.611486, 0), -2.2644, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sphcl"]
+curve = SubResource("Curve_v4rg1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dlg3s"]
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+alpha_curve = SubResource("CurveTexture_gbxxq")
+emission_curve = SubResource("CurveTexture_sphcl")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_75yk7"]
+load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
+
 [sub_resource type="Animation" id="Animation_hsw0d"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("visuals/skin_1:position")
+tracks/0/path = NodePath("fragments:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/skin_1:rotation")
+tracks/1/path = NodePath("PointLight2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("visuals/skin_1:scale")
+tracks/2/path = NodePath("PointLight2D:energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("visuals/skin_2:position")
+tracks/3/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.950226, -1.27876)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("visuals/skin_2:rotation")
+tracks/4/path = NodePath("overheat_p:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.0647286]
+"update": 1,
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("visuals/skin_2:scale")
+tracks/5/path = NodePath("death:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1.18084, 1.33484)]
+"update": 1,
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("visuals/skin_1:modulate")
+tracks/6/path = NodePath("visuals/animationer:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("fragments:emitting")
+tracks/7/path = NodePath("visuals/animationer:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("visuals/skin_2:modulate")
+tracks/8/path = NodePath("visuals/animationer:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("PointLight2D:visible")
+tracks/9/path = NodePath("visuals/animationer/dmg_shader:material:shader_parameter/hit_opacity")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("PointLight2D:energy")
+tracks/10/path = NodePath("visuals/animationer/dmg_shader:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("player_ui/CanvasLayer/Control/damage:modulate")
+tracks/11/path = NodePath("visuals/animationer:visible")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("overheat_p:emitting")
+tracks/12/path = NodePath("point_frags:emitting")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("visuals/skin_1:material:shader_parameter/hit_opacity")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("visuals/skin_2:material:shader_parameter/hit_opacity")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("death:playing")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -416,22 +416,46 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/skin_1:material:shader_parameter/hit_opacity")
+tracks/1/path = NodePath("visuals/animationer/dmg_shader:material:shader_parameter/hit_opacity")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 1.0, 0.0]
+"values": [3.0, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("visuals/skin_2:material:shader_parameter/hit_opacity")
+tracks/2/path = NodePath("visuals/animationer/dmg_shader:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -444,146 +468,86 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("visuals/skin_1:position")
+tracks/0/path = NodePath("fragments:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/skin_1:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("visuals/skin_1:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.693683, 0.748293), Vector2(4.36509, 3.27748)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("visuals/skin_1:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("fragments:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 5.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("death:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("visuals/animationer/dmg_shader:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("visuals/skin_2:position")
+tracks/5/path = NodePath("visuals/animationer/dmg_shader:material:shader_parameter/hit_opacity")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876)]
+"values": [0.0, 1.0, 0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("visuals/skin_2:rotation")
+tracks/6/path = NodePath("visuals/animationer:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-0.0647286, -0.0647286, -0.0647286]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("visuals/skin_2:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1.18084, 1.33484), Vector2(0.824113, 1.03329), Vector2(4.36006, 4.57391)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("visuals/skin_2:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("PointLight2D:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("PointLight2D:energy")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 5.0, 0.0]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("death:playing")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_oh0ac"]
@@ -615,7 +579,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.607843)]
 }
 
 [sub_resource type="Animation" id="Animation_7s8tg"]
@@ -661,79 +625,80 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_r4bfc"]
 resource_name = "shoot"
 length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("visuals/skin_1:position")
+tracks/0/path = NodePath("PointLight2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/skin_1:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("visuals/skin_1:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PointLight2D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PointLight2D:energy")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.329877, 1),
 "update": 0,
 "values": [1.0, 0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("visuals/animationer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("visuals/animationer:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("visuals/animationer:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.899483, 1.10352), Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_66wf3"]
 resource_name = "walk"
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("visuals/skin_1:position")
+tracks/0/path = NodePath("visuals/animationer:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0)]
@@ -741,11 +706,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("visuals/skin_1:rotation")
+tracks/1/path = NodePath("visuals/animationer:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.0]
@@ -753,50 +718,102 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("visuals/skin_1:scale")
+tracks/2/path = NodePath("visuals/animationer:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.941365, 0.722394)]
+"values": [Vector2(1, 1), Vector2(0.709845, 0.886355)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("visuals/skin_2:position")
+tracks/3/path = NodePath("visuals/animationer/dmg_shader:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lxg2e"]
+resource_name = "point"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("point_frags:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals/animationer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-0.950226, -1.27876), Vector2(-0.950226, -1.27876)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("visuals/animationer:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("visuals/animationer:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.899483, 1.10352), Vector2(1.20359, 1.2687), Vector2(0.899483, 1.10352)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("visuals/skin_2:rotation")
+tracks/4/path = NodePath("PointLight2D:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.0647286, -0.0647286]
+"update": 1,
+"values": [true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("visuals/skin_2:scale")
+tracks/5/path = NodePath("PointLight2D:energy")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1.18084, 1.33484), Vector2(1.08733, 0.871077)]
+"values": [0.0, 3.5, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jegl2"]
@@ -807,11 +824,35 @@ _data = {
 "full_health": SubResource("Animation_oh0ac"),
 "low_health": SubResource("Animation_4s2cl"),
 "overheat": SubResource("Animation_7s8tg"),
+"point": SubResource("Animation_lxg2e"),
 "shoot": SubResource("Animation_r4bfc"),
 "walk": SubResource("Animation_66wf3")
 }
 
-[node name="player" type="CharacterBody2D" groups=["damageables"]]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj5xi"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cg54w"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y0pej"]
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.25
+alpha_curve = SubResource("CurveTexture_gbxxq")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_thdpx"]
+load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd9.ctex"
+
+[node name="player" type="CharacterBody2D" groups=["damageables", "scoring"]]
 light_mask = 2
 script = ExtResource("1_nlfmk")
 bullet_speed = 12500.0
@@ -830,6 +871,13 @@ script = ExtResource("3_hdoig")
 spawn_type = 1
 target_location = null
 scene = ExtResource("4_6ks7v")
+sync_starting_changes = true
+
+[node name="bomb_instantiator" type="Node" parent="."]
+script = ExtResource("3_hdoig")
+spawn_type = 1
+target_location = null
+scene = ExtResource("5_nlqpa")
 sync_starting_changes = true
 
 [node name="rot_sync2" type="Node" parent="."]
@@ -851,9 +899,39 @@ interpolation = null
 interpolated = false
 interpolation_speed = 10.0
 
-[node name="rot_sync" type="Node" parent="."]
+[node name="time_sync" type="Node" parent="."]
 script = ExtResource("2_v68i0")
 broadcast = 2
+refresh_rate = 20
+node_path = NodePath("../player_ui/CanvasLayer/Control/Panel/time")
+property_name = "text"
+interpolation = null
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="score_update1" type="Node" parent="."]
+script = ExtResource("2_v68i0")
+broadcast = 4
+refresh_rate = 20
+node_path = NodePath("../player_ui/CanvasLayer/Control/Panel/domination/score/t1_score")
+property_name = "text"
+interpolation = null
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="score_update2" type="Node" parent="."]
+script = ExtResource("2_v68i0")
+broadcast = 4
+refresh_rate = 20
+node_path = NodePath("../player_ui/CanvasLayer/Control/Panel/domination/score/t2_score")
+property_name = "text"
+interpolation = null
+interpolated = false
+interpolation_speed = 10.0
+
+[node name="rot_sync" type="Node" parent="."]
+script = ExtResource("2_v68i0")
+broadcast = 4
 refresh_rate = 20
 node_path = NodePath("../CollisionPolygon2D")
 property_name = "rotation"
@@ -882,23 +960,46 @@ text = "name"
 rotation = 0.16057
 scale = Vector2(0.15, 0.15)
 
-[node name="skin_1" type="Polygon2D" parent="visuals"]
-material = SubResource("ShaderMaterial_twx14")
-offset = Vector2(-460, -220)
-texture = ExtResource("2_jqu0l")
-polygon = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817.021, 425.532)
-uv = PackedVector2Array(663.83, -6.383, -44.6809, 293.617, 2.12756, 319.149, 817.021, 425.532)
+[node name="animationer" type="Node2D" parent="visuals"]
 
-[node name="skin_2" type="Polygon2D" parent="visuals"]
+[node name="sniper" type="Polygon2D" parent="visuals/animationer"]
+position = Vector2(-0.169128, -0.599493)
+offset = Vector2(-464.702, -219.361)
+texture = ExtResource("8_e74mq")
+polygon = PackedVector2Array(662.791, -37.2093, 802.326, 425.581, -20.9302, 327.907, -16.2791, 267.442)
+uv = PackedVector2Array(662.791, -37.2093, 802.326, 425.581, -20.9302, 327.907, -16.2791, 267.442)
+
+[node name="auto" type="Polygon2D" parent="visuals/animationer"]
 visible = false
-material = SubResource("ShaderMaterial_aj5qm")
-position = Vector2(-0.950226, -1.27876)
-rotation = -0.0647286
-scale = Vector2(1.18084, 1.33484)
-offset = Vector2(-2110.85, -213.182)
-texture = ExtResource("2_jqu0l")
-polygon = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
-uv = PackedVector2Array(2314.89, 51.0638, 1689.36, 236.17, 1785.11, 321.277, 2370.21, 391.489, 2370.21, 223.404)
+position = Vector2(-1627.57, 0.219879)
+rotation = -0.049625
+offset = Vector2(-464.702, -219.361)
+texture = ExtResource("8_e74mq")
+polygon = PackedVector2Array(1632.35, 283.811, 2337.57, 50.9657, 2440.79, 555.976, 1590.42, 389.101)
+uv = PackedVector2Array(1696.88, 212.5, 2353.13, 21.875, 2387.5, 415.625, 1681.25, 278.125)
+
+[node name="heavy" type="Polygon2D" parent="visuals/animationer"]
+visible = false
+position = Vector2(10.8444, 25.2578)
+rotation = -0.049625
+offset = Vector2(-2158.12, -2434.68)
+texture = ExtResource("8_e74mq")
+polygon = PackedVector2Array(1667.06, 2422.3, 1714.93, 2490.76, 2523.34, 2642.18, 2377.43, 2175.47)
+uv = PackedVector2Array(1687.3, 2453.97, 1696.83, 2530.16, 2534.92, 2639.68, 2371.43, 2176.19)
+
+[node name="dmg_shader" type="Polygon2D" parent="visuals/animationer"]
+visible = false
+material = SubResource("ShaderMaterial_mfide")
+position = Vector2(-1928.28, -2064.93)
+color = Color(0, 0, 0, 1)
+texture = SubResource("PlaceholderTexture2D_i58ck")
+polygon = PackedVector2Array(1477.4, 2158.22, 1484.16, 2116.6, 1891.49, 1962.84, 2106.71, 1873.95, 2135.16, 1882.85, 2171.78, 2025.5, 2188.14, 2043.11, 2232.21, 2231.82, 2215.66, 2254.76)
+uv = PackedVector2Array(1701.59, 2047.62, 2106.35, 1980.95, 2103.17, 2153.97)
+
+[node name="bomb_spawn" type="Node2D" parent="visuals/animationer"]
+unique_name_in_owner = true
+position = Vector2(-763.385, 123.641)
+rotation = -0.16057
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -915,8 +1016,12 @@ lifetime = 1.0
 speed_scale = 2.5
 
 [node name="overheat_p" parent="." instance=ExtResource("12_o3axa")]
+material = SubResource("CanvasItemMaterial_iq7ye")
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_dlg3s")
+texture = SubResource("CompressedTexture2D_75yk7")
 lifetime = 1.0
-speed_scale = 2.5
+speed_scale = 2.0
 
 [node name="public_animations" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1022,13 +1127,15 @@ show_percentage = false
 [node name="death_label" type="Label" parent="player_ui/CanvasLayer/Control"]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 184.0
-offset_top = 124.0
-offset_right = 921.0
-offset_bottom = 365.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.0
+offset_top = -156.0
+offset_right = 365.0
+offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_sy5ff")
@@ -1068,6 +1175,183 @@ theme = ExtResource("17_gglwy")
 theme_override_colors/font_color = Color(0.968627, 0.145098, 0.521569, 1)
 text = "OVERHEATED!"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="player_ui/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -476.0
+offset_top = -283.5
+offset_right = 476.0
+offset_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="win" type="Label" parent="player_ui/CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = SubResource("Theme_sy5ff")
+theme_override_font_sizes/font_size = 200
+text = "Victory"
+
+[node name="loss" type="Label" parent="player_ui/CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = SubResource("Theme_sy5ff")
+theme_override_font_sizes/font_size = 200
+text = "Defeat"
+
+[node name="kills" type="Label" parent="player_ui/CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_sy5ff")
+theme_override_font_sizes/font_size = 50
+text = "Kills: Not Loading"
+
+[node name="main_menu" type="Button" parent="player_ui/CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = SubResource("Theme_sy5ff")
+theme_override_font_sizes/font_size = 50
+text = "Menu"
+
+[node name="Panel" type="Panel" parent="player_ui/CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_right = 125.0
+offset_bottom = 104.0
+grow_horizontal = 2
+theme = ExtResource("17_gglwy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vj5xi")
+metadata/_edit_group_ = true
+
+[node name="domination" type="Label" parent="player_ui/CanvasLayer/Control/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "Domination"
+
+[node name="score" type="HBoxContainer" parent="player_ui/CanvasLayer/Control/Panel/domination"]
+layout_mode = 0
+offset_left = 19.5
+offset_top = 62.0
+offset_right = 190.5
+offset_bottom = 102.0
+alignment = 1
+
+[node name="t1_score" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "0
+"
+
+[node name="seperator1" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "|"
+
+[node name="t2_score" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="seperator2" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+visible = false
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "|"
+
+[node name="t3_score" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="seperator3" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+visible = false
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "|"
+
+[node name="t4_score" type="Label" parent="player_ui/CanvasLayer/Control/Panel/domination/score"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="deathmatch" type="Label" parent="player_ui/CanvasLayer/Control/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 37.0
+grow_horizontal = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "Deathmatch"
+
+[node name="time" type="Label" parent="player_ui/CanvasLayer/Control/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 32.0
+offset_right = 170.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 30
+text = "5:00"
+
+[node name="just_killed_label" type="Label" parent="player_ui/CanvasLayer/Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -77.0
+offset_top = -235.0
+offset_right = 73.0
+offset_bottom = -174.0
+theme = ExtResource("17_gglwy")
+theme_override_font_sizes/font_size = 50
+text = "+1 Kill"
+
 [node name="cooldown_timer" type="Timer" parent="."]
 one_shot = true
 
@@ -1078,24 +1362,40 @@ one_shot = true
 [node name="snipe_timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="bomb_timer" type="Timer" parent="."]
+one_shot = true
+
 [node name="overheat_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
+volume_db = 10.0
 
 [node name="cooldown_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_a5iym")
+volume_db = 10.0
 pitch_scale = 6.0
 
 [node name="death" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("20_ye057")
-volume_db = -15.0
-pitch_scale = 2.0
+stream = ExtResource("19_1u3v4")
+volume_db = -24.0
 
-[node name="respawn" type="AudioStreamPlayer2D" parent="."]
+[node name="point_frags" parent="." instance=ExtResource("12_o3axa")]
+material = SubResource("CanvasItemMaterial_cg54w")
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_y0pej")
+texture = SubResource("CompressedTexture2D_thdpx")
+lifetime = 0.4
+
+[node name="just_killed" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="health_changed" from="." to="player_ui" method="_on_player_health_changed"]
 [connection signal="animation_finished" from="public_animations" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="private_animations" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Camera2D/shake_timer" to="Camera2D" method="_on_shake_timer_timeout"]
+[connection signal="pressed" from="player_ui/CanvasLayer/Control/VBoxContainer/main_menu" to="." method="_on_main_menu_pressed"]
 [connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="snipe_timer" to="." method="_on_snipe_timer_timeout"]
+[connection signal="timeout" from="bomb_timer" to="." method="_on_bomb_timer_timeout"]
+[connection signal="timeout" from="just_killed" to="." method="_on_just_killed_timeout"]

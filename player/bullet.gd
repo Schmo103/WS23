@@ -1,5 +1,6 @@
 extends Node2D
 
+signal bullet_hit
 
 @export var bullet_damage = 10
 
@@ -57,7 +58,7 @@ func _on_area_2d_body_entered(body):
 	
 	if body.is_in_group("damageables"):
 		body.damage(bullet_damage)
-
+		emit_signal("bullet_hit")
 	explode()
 
 

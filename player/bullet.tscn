@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="1_ghasw"]
 [ext_resource type="Script" path="res://player/bullet.gd" id="1_wm5ir"]
-[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="3_mp2cq"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="3_8ft1w"]
 [ext_resource type="AudioStream" uid="uid://dxkhd3bykol3w" path="res://sound/Digital_SFX_Set/laser2.mp3" id="4_p5kyt"]
 [ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="4_q6cyl"]
 [ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="5_us27s"]
@@ -45,7 +45,7 @@ load_path = "res://.godot/imported/particles.png-b0ec2c285a5901d87a26c9d5a9eb0dd
 
 [node name="bullet" type="Node2D"]
 z_index = -1
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_wm5ir")
 
 [node name="PropertySynchronizer" type="Node" parent="."]
@@ -78,7 +78,7 @@ position = Vector2(0.072937, -1.1582)
 rotation = 1.5708
 color = Color(0.121569, 0.486275, 0.619608, 1)
 offset = Vector2(-2315.84, -745.919)
-texture = ExtResource("3_mp2cq")
+texture = ExtResource("3_8ft1w")
 polygon = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826, 2257.97, 1110.15, 2378.26, 1052.17, 2504.35, 714.493, 2321.74, 402.899)
 uv = PackedVector2Array(2289.85, 413.043, 2231.88, 460.87, 2159.42, 747.826, 2257.97, 1110.15, 2378.26, 1052.17, 2504.35, 714.493, 2321.74, 402.899)
 

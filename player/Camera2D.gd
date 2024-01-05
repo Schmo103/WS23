@@ -26,6 +26,7 @@ func _ready():
 
 
 # When Process is running, screen will be shaking
+@warning_ignore("unused_parameter")
 func _process(delta):
 	var shake_vector = Vector2(randf_range(-1,1) * shake_intensity, randf_range(-1,1) * shake_intensity)
 	var tween = create_tween()
@@ -47,5 +48,5 @@ func _on_shake_timer_timeout():
 ################################################################################
 ## Signal Functions ##
 
-func walk_screen_shake():
-	shake(walk_shake_intensity)
+func walk_screen_shake(intensity):
+	shake(intensity)

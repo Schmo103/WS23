@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://d3134kn1aiuk7" path="res://sound/Cyberpunk Moonlight Sonata.mp3" id="3_je12o"]
 
 [node name="global" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_37t4k")
 
 [node name="menu_music" type="AudioStreamPlayer2D" parent="."]
@@ -12,5 +13,16 @@ stream = ExtResource("3_je12o")
 volume_db = -15.69
 
 [node name="test_lvl_music" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = ExtResource("1_bh846")
 volume_db = -13.897
+
+[node name="dom_timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="dead_player" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="dead_player" to="." method="_on_dead_player_timeout"]

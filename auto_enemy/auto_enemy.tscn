@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcqx5punqw0qj"]
+
+[ext_resource type="Script" path="res://auto_enemy/auto_enemy.gd" id="1_gpu00"]
+[ext_resource type="Texture2D" uid="uid://c85xfqba1exln" path="res://extra_assets/icon.svg" id="2_yc0y5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cniyv"]
+size = Vector2(128, 128)
+
+[node name="auto_enemy" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_gpu00")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="attack_timer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yc0y5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_cniyv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 500.0
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

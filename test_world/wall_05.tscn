@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bnmi0nstf4jed"]
 
-[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="1_sw5j0"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="1_ecuma"]
 
 [node name="wall_05" type="StaticBody2D"]
 scale = Vector2(0.3, 0.3)
@@ -8,7 +8,7 @@ scale = Vector2(0.3, 0.3)
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(1, 1)
 offset = Vector2(-1274, -1061)
-texture = ExtResource("1_sw5j0")
+texture = ExtResource("1_ecuma")
 polygon = PackedVector2Array(1530.77, 496.154, 826.923, 790.385, 701.923, 1230.77, 738.462, 1286.54, 1391.23, 1563.16, 1791.23, 926.316)
 uv = PackedVector2Array(1530.77, 496.154, 826.923, 790.385, 701.923, 1230.77, 738.462, 1286.54, 1391.23, 1563.16, 1791.23, 926.316)
 

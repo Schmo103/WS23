@@ -1,0 +1,364 @@
+[gd_scene load_steps=15 format=3 uid="uid://cqr5lvlpsy64y"]
+
+[ext_resource type="Script" path="res://Domination/Domination.gd" id="1_phsrc"]
+[ext_resource type="PackedScene" uid="uid://bo3ntfkmhfw0m" path="res://test_world/wall_02.tscn" id="1_tcese"]
+[ext_resource type="PackedScene" uid="uid://din5d5slu2p0o" path="res://test_world/wall_03.tscn" id="2_ip4gd"]
+[ext_resource type="PackedScene" uid="uid://cecxluda21lcg" path="res://test_world/wall_04.tscn" id="3_o3n7k"]
+[ext_resource type="PackedScene" uid="uid://bnmi0nstf4jed" path="res://test_world/wall_05.tscn" id="4_hq35v"]
+[ext_resource type="Shader" path="res://godot_retro_shaders/Glitch.gdshader" id="5_efrde"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="6_uiala"]
+[ext_resource type="Texture2D" uid="uid://c85xfqba1exln" path="res://extra_assets/icon.svg" id="7_thp4v"]
+[ext_resource type="PackedScene" uid="uid://5brffqm0sw7v" path="res://pause_menu.tscn" id="9_dc3gx"]
+[ext_resource type="AudioStream" uid="uid://sj64g6c3rup8" path="res://sound/point-in-space-36199.mp3" id="10_n7hf5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_butfc"]
+resource_local_to_scene = true
+shader = ExtResource("5_efrde")
+shader_parameter/_ScanLineJitter = 0.25
+shader_parameter/_VerticalJump = 0.01
+shader_parameter/_HorizontalShake = 0.0
+shader_parameter/_ColorDrift = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ej54q"]
+shader = ExtResource("5_efrde")
+shader_parameter/_ScanLineJitter = 0.25
+shader_parameter/_VerticalJump = 0.01
+shader_parameter/_HorizontalShake = 0.02
+shader_parameter/_ColorDrift = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqcp8"]
+size = Vector2(65.3873, 40.4947)
+
+[sub_resource type="Environment" id="Environment_uabqy"]
+background_mode = 3
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_intensity = 1.0
+glow_mix = 0.496
+glow_bloom = 0.2
+glow_blend_mode = 0
+fog_light_color = Color(0.380392, 0.737255, 1, 1)
+fog_sun_scatter = 1.5
+fog_density = 0.4773
+fog_height = 209.45
+fog_height_density = 8.9013
+volumetric_fog_density = 0.7773
+volumetric_fog_albedo = Color(0.258824, 0.223529, 0.784314, 1)
+volumetric_fog_emission_energy = 233.73
+volumetric_fog_gi_inject = 2.49
+volumetric_fog_length = 459.63
+adjustment_contrast = 1.15
+
+[node name="Domination" type="Node2D"]
+script = ExtResource("1_phsrc")
+
+[node name="background" type="ColorRect" parent="."]
+z_index = -25
+offset_left = -5232.0
+offset_top = -4505.0
+offset_right = -4544.0
+offset_bottom = -3515.0
+scale = Vector2(19.5145, 13.6314)
+color = Color(0, 0, 0, 1)
+
+[node name="environment" type="Node2D" parent="."]
+position = Vector2(-1618, 350)
+
+[node name="walls" type="Node2D" parent="environment"]
+
+[node name="h_chunk" type="Node2D" parent="environment/walls"]
+position = Vector2(175, -714)
+rotation = 0.361769
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_2" type="Node2D" parent="environment/walls"]
+position = Vector2(1795, -296)
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_2" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_2" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_2" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_2" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_2" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_2" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_3" type="Node2D" parent="environment/walls"]
+position = Vector2(1830, 372)
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_3" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_3" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_3" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_3" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_3" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_3" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_4" type="Node2D" parent="environment/walls"]
+position = Vector2(176, 527)
+rotation = -0.154999
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_4" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_4" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_4" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_4" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_4" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_4" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_5" type="Node2D" parent="environment/walls"]
+position = Vector2(-403, -509)
+rotation = 1.56884
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_5" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_5" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_5" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_5" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_5" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_5" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="walls2" type="Node2D" parent="environment"]
+position = Vector2(7088, -62)
+rotation = -3.12558
+
+[node name="h_chunk2" type="Node2D" parent="environment/walls2"]
+position = Vector2(3058, -756)
+rotation = 0.361769
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk2" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk2" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk2" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk2" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk2" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk2" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_6" type="Node2D" parent="environment/walls2"]
+position = Vector2(3059, 485)
+rotation = -0.154999
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_7" type="Node2D" parent="environment/walls2"]
+position = Vector2(2480, -551)
+rotation = 1.56884
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_tcese")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_ip4gd")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_tcese")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_ip4gd")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_tcese")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_ip4gd")]
+position = Vector2(-458, -59)
+
+[node name="pillars" type="Node2D" parent="environment"]
+
+[node name="wall_04" parent="environment/pillars" instance=ExtResource("3_o3n7k")]
+position = Vector2(2076, -28)
+rotation = -1.28597
+
+[node name="wall_07" parent="environment/pillars" instance=ExtResource("3_o3n7k")]
+position = Vector2(3539, 16)
+rotation = -2.85982
+
+[node name="wall_08" parent="environment/pillars" instance=ExtResource("3_o3n7k")]
+position = Vector2(671, -78)
+rotation = 0.24634
+
+[node name="wall_05" parent="environment/pillars" instance=ExtResource("4_hq35v")]
+position = Vector2(1443, -16)
+rotation = 0.72119
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_06" parent="environment/pillars" instance=ExtResource("4_hq35v")]
+position = Vector2(2743, -46)
+rotation = -1.33276
+scale = Vector2(0.20211, 0.216763)
+
+[node name="spawn1" type="Marker2D" parent="."]
+position = Vector2(-1706, 226)
+
+[node name="Polygon2D" type="Polygon2D" parent="spawn1"]
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_uiala")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="Sprite2D" parent="spawn1/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+position = Vector2(90.0002, -80)
+scale = Vector2(11.7187, 13.75)
+texture = ExtResource("7_thp4v")
+
+[node name="spawn2" type="Marker2D" parent="."]
+position = Vector2(2602, 510)
+
+[node name="Polygon2D" type="Polygon2D" parent="spawn2"]
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_uiala")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="Sprite2D" parent="spawn2/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+position = Vector2(90.0002, -80)
+scale = Vector2(11.7187, 13.75)
+texture = ExtResource("7_thp4v")
+
+[node name="respawn" type="Marker2D" parent="."]
+position = Vector2(457, -51)
+
+[node name="Polygon2D" type="Polygon2D" parent="respawn"]
+visible = false
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_uiala")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="Sprite2D" parent="respawn/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+position = Vector2(90.0002, -80)
+scale = Vector2(11.7187, 13.75)
+texture = ExtResource("7_thp4v")
+
+[node name="hill" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ej54q")
+offset_left = -187.0
+offset_top = -165.0
+offset_right = -119.0
+offset_bottom = -89.0
+scale = Vector2(19.5145, 13.6314)
+color = Color(0.968627, 0.145098, 0.521569, 0.356863)
+
+[node name="score_detector" type="Area2D" parent="."]
+position = Vector2(-187, -165)
+scale = Vector2(19.5145, 13.6314)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="score_detector"]
+visible = false
+position = Vector2(35.0509, 35.7997)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_eqcp8")
+
+[node name="score_time" type="Timer" parent="."]
+autostart = true
+
+[node name="pause_menu" parent="." instance=ExtResource("9_dc3gx")]
+
+[node name="score_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_n7hf5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uabqy")
+
+[connection signal="timeout" from="score_time" to="." method="_on_score_time_timeout"]

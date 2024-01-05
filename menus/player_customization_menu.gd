@@ -25,7 +25,7 @@ func _on_continue_pressed():
 	
 #	Set the player's username so it may be displayed in lobbies and games.
 	GDSync.set_player_username(%Username.text)
-	
+	GDSync.set_player_data("kills",0)
 	GDSync.set_player_data("class",chosen_class)
 #	Set any other custom player data, in this case the player color
 	#GDSync.set_player_data("Color", %Color.color)

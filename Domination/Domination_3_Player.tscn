@@ -1,0 +1,473 @@
+[gd_scene load_steps=10 format=3 uid="uid://bata76rec1bh0"]
+
+[ext_resource type="Script" path="res://Domination/Domination_3_Player.gd" id="1_1iqkj"]
+[ext_resource type="PackedScene" uid="uid://bo3ntfkmhfw0m" path="res://test_world/wall_02.tscn" id="1_ssmui"]
+[ext_resource type="PackedScene" uid="uid://din5d5slu2p0o" path="res://test_world/wall_03.tscn" id="2_uehae"]
+[ext_resource type="PackedScene" uid="uid://cecxluda21lcg" path="res://test_world/wall_04.tscn" id="3_paqfy"]
+[ext_resource type="PackedScene" uid="uid://bnmi0nstf4jed" path="res://test_world/wall_05.tscn" id="4_n34y2"]
+[ext_resource type="Shader" path="res://godot_retro_shaders/Glitch.gdshader" id="5_lxp60"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="6_013jj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ej54q"]
+shader = ExtResource("5_lxp60")
+shader_parameter/_ScanLineJitter = 0.26
+shader_parameter/_VerticalJump = 0.02
+shader_parameter/_HorizontalShake = 0.02
+shader_parameter/_ColorDrift = 0.08
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_butfc"]
+resource_local_to_scene = true
+shader = ExtResource("5_lxp60")
+shader_parameter/_ScanLineJitter = 0.25
+shader_parameter/_VerticalJump = 0.01
+shader_parameter/_HorizontalShake = 0.0
+shader_parameter/_ColorDrift = 0.02
+
+[node name="Domination" type="Node2D"]
+script = ExtResource("1_1iqkj")
+
+[node name="background" type="ColorRect" parent="."]
+offset_left = -8038.0
+offset_top = -4465.0
+offset_right = -7350.0
+offset_bottom = -3475.0
+scale = Vector2(19.5145, 13.6314)
+color = Color(0, 0, 0, 1)
+
+[node name="environment" type="Node2D" parent="."]
+position = Vector2(-1618, 350)
+
+[node name="tunnel" type="Node2D" parent="environment"]
+visible = false
+rotation = 0.0183022
+
+[node name="h_chunk4" type="Node2D" parent="environment/tunnel"]
+position = Vector2(1203, 938)
+rotation = -2.60407
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/tunnel/h_chunk4" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/tunnel/h_chunk4" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/tunnel/h_chunk4" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/tunnel/h_chunk4" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/tunnel/h_chunk4" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/tunnel/h_chunk4" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk3" type="Node2D" parent="environment/tunnel"]
+position = Vector2(663, 1057)
+rotation = -2.60407
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/tunnel/h_chunk3" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/tunnel/h_chunk3" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/tunnel/h_chunk3" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/tunnel/h_chunk3" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/tunnel/h_chunk3" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/tunnel/h_chunk3" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="tunnel2" type="Node2D" parent="environment"]
+visible = false
+rotation = 0.0183022
+
+[node name="h_chunk5" type="Node2D" parent="environment/tunnel2"]
+position = Vector2(3666.74, 1482.14)
+rotation = -0.609282
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/tunnel2/h_chunk5" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/tunnel2/h_chunk5" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/tunnel2/h_chunk5" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/tunnel2/h_chunk5" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/tunnel2/h_chunk5" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/tunnel2/h_chunk5" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk6" type="Node2D" parent="environment/tunnel2"]
+position = Vector2(3179.39, 1249.02)
+rotation = -0.560018
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/tunnel2/h_chunk6" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/tunnel2/h_chunk6" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/tunnel2/h_chunk6" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/tunnel2/h_chunk6" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/tunnel2/h_chunk6" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/tunnel2/h_chunk6" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="walls" type="Node2D" parent="environment"]
+position = Vector2(489, 552)
+rotation = -0.547987
+
+[node name="h_chunk" type="Node2D" parent="environment/walls"]
+position = Vector2(195.015, -772.519)
+rotation = 0.279316
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_4" type="Node2D" parent="environment/walls"]
+position = Vector2(176, 527)
+rotation = -0.154999
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_4" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_4" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_4" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_4" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_4" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_4" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_5" type="Node2D" parent="environment/walls"]
+position = Vector2(-403, -509)
+rotation = 1.56884
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls/h_chunk_5" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls/h_chunk_5" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls/h_chunk_5" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls/h_chunk_5" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls/h_chunk_5" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls/h_chunk_5" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="walls2" type="Node2D" parent="environment"]
+position = Vector2(5612, 1600)
+rotation = -2.6665
+
+[node name="h_chunk2" type="Node2D" parent="environment/walls2"]
+position = Vector2(3058, -756)
+rotation = 0.361769
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_6" type="Node2D" parent="environment/walls2"]
+position = Vector2(3059, 485)
+rotation = -0.154999
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_7" type="Node2D" parent="environment/walls2"]
+position = Vector2(2480, -551)
+rotation = 1.56884
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls2/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls2/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="walls3" type="Node2D" parent="environment"]
+position = Vector2(1412, -4640)
+rotation = -4.73312
+
+[node name="h_chunk2" type="Node2D" parent="environment/walls3"]
+position = Vector2(3059.5, -812.762)
+rotation = 0.243951
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls3/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls3/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls3/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls3/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls3/h_chunk2" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls3/h_chunk2" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_6" type="Node2D" parent="environment/walls3"]
+position = Vector2(3059, 485)
+rotation = -0.154999
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls3/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls3/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls3/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls3/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls3/h_chunk_6" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls3/h_chunk_6" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="h_chunk_7" type="Node2D" parent="environment/walls3"]
+position = Vector2(2480, -551)
+rotation = 1.56884
+metadata/_edit_group_ = true
+
+[node name="wall_02" parent="environment/walls3/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(203, -64)
+
+[node name="wall_03" parent="environment/walls3/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(449, -56)
+
+[node name="wall_04" parent="environment/walls3/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(766, -58)
+
+[node name="wall_05" parent="environment/walls3/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(1012, -50)
+
+[node name="wall_06" parent="environment/walls3/h_chunk_7" instance=ExtResource("1_ssmui")]
+position = Vector2(-142, -62)
+
+[node name="wall_07" parent="environment/walls3/h_chunk_7" instance=ExtResource("2_uehae")]
+position = Vector2(-458, -59)
+
+[node name="pillars" type="Node2D" parent="environment"]
+
+[node name="wall_04" parent="environment/pillars" instance=ExtResource("3_paqfy")]
+position = Vector2(2391, 132)
+rotation = -2.49786
+
+[node name="wall_07" parent="environment/pillars" instance=ExtResource("3_paqfy")]
+position = Vector2(963, 76)
+rotation = -0.185436
+
+[node name="wall_08" parent="environment/pillars" instance=ExtResource("3_paqfy")]
+position = Vector2(1638, -1092)
+rotation = 1.75843
+
+[node name="wall_05" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(1272, 9.00002)
+rotation = 2.92772
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_10" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(1458, -286)
+rotation = -1.2889
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_09" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(2171, -143)
+rotation = 1.44777
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_12" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(1785, -133)
+rotation = -0.748883
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_06" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(1537, -730)
+rotation = -1.86024
+scale = Vector2(0.20211, 0.216763)
+
+[node name="wall_11" parent="environment/pillars" instance=ExtResource("4_n34y2")]
+position = Vector2(1760, -468)
+rotation = 0.218976
+scale = Vector2(0.20211, 0.216763)
+
+[node name="hill" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ej54q")
+offset_left = -563.0
+offset_top = -513.0
+offset_right = -498.0
+offset_bottom = -425.0
+scale = Vector2(19.5145, 13.6314)
+color = Color(0.968627, 0.145098, 0.521569, 0.356863)
+
+[node name="spawn1" type="Marker2D" parent="."]
+position = Vector2(-1140, 603)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="spawn1"]
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_013jj")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="ColorRect" parent="spawn1/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+offset_left = -810.0
+offset_top = -800.0
+offset_right = -676.0
+offset_bottom = -684.0
+scale = Vector2(11.7187, 13.75)
+
+[node name="spawn2" type="Marker2D" parent="."]
+position = Vector2(1226, 678)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="spawn2"]
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_013jj")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="ColorRect" parent="spawn2/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+offset_left = -810.0
+offset_top = -800.0
+offset_right = -676.0
+offset_bottom = -684.0
+scale = Vector2(11.7187, 13.75)
+
+[node name="spawn3" type="Marker2D" parent="."]
+position = Vector2(24, -1318)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="spawn3"]
+position = Vector2(1, -0.999998)
+scale = Vector2(0.1, 0.1)
+offset = Vector2(-1249, -1051)
+texture = ExtResource("6_013jj")
+polygon = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+uv = PackedVector2Array(696.552, 1227.59, 837.931, 751.724, 1527.59, 500, 1789.66, 920.69, 1413.79, 1575.86, 710.345, 1272.41)
+
+[node name="Sprite2D" type="ColorRect" parent="spawn3/Polygon2D"]
+visible = false
+material = SubResource("ShaderMaterial_butfc")
+offset_left = -810.0
+offset_top = -800.0
+offset_right = -676.0
+offset_bottom = -684.0
+scale = Vector2(11.7187, 13.75)

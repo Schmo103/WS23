@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/sniper_bullet.gd" id="1_8l2gy"]
 [ext_resource type="Script" path="res://addons/GD-Sync/Scripts/Types/PropertySynchronizer.gd" id="2_dq5at"]
-[ext_resource type="Texture2D" uid="uid://biwntnsv1oh8x" path="res://shared/WS23_art_01.png" id="3_yita5"]
+[ext_resource type="Texture2D" uid="uid://c78x6bp5y2qlp" path="res://shared/WS23_art_01.png" id="3_dcr8o"]
 [ext_resource type="AudioStream" uid="uid://bah1823vc57wt" path="res://sound/Digital_SFX_Set/laser1.mp3" id="4_8t56u"]
 [ext_resource type="Texture2D" uid="uid://c1vo462pok54b" path="res://player/light.png" id="5_ga4ah"]
 [ext_resource type="PackedScene" uid="uid://da7eev4n35k23" path="res://test_world/fragments.tscn" id="6_4crjp"]
@@ -118,7 +118,7 @@ polygon = PackedVector2Array(-520.873, -166.658, -288.405, -594.629, -206.728, -
 position = Vector2(-70, 400)
 rotation = 1.40794
 offset = Vector2(-2315.84, -745.919)
-texture = ExtResource("3_yita5")
+texture = ExtResource("3_dcr8o")
 polygon = PackedVector2Array(2028.03, 123.012, 1772.58, 567.475, 1810.76, 1445.28, 2145.93, 638.956)
 uv = PackedVector2Array(2002.13, 334.043, 1672.34, 551.064, 1885.11, 1057.45, 2202.13, 629.787)
 

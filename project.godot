@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/multi
 [file_customization]
 
 folder_colors={
+"res://Domination/": "yellow",
 "res://GD-SyncTemplates/": "red",
 "res://addons/": "green",
 "res://extra_assets/": "yellow",
