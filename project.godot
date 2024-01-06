@@ -22,7 +22,7 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.0705882, 0.0705882, 0.0705882, 1)
 boot_splash/show_image=false
 boot_splash/image="res://menus/cover_small.png"
-config/icon="res://extra_assets/icon.svg"
+config/icon="res://snip_cover.PNG"
 
 [autoload]
 
@@ -34,6 +34,12 @@ Global="*res://global.tscn"
 multirun/number_of_windows=2
 multirun/add_custom_args=true
 multirun/window_args=["listen", "join"]
+
+[display]
+
+window/size/mode=2
+mouse_cursor/custom_image="res://player/crosshair.png"
+mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [editor_plugins]
 

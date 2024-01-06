@@ -63,7 +63,7 @@ var dead = false
 var death_position
 
 var dom_game_time = 300
-var dm_game_time = 60
+var dm_game_time = 300
 
 var player_class
 

@@ -347,7 +347,6 @@ scale = Vector2(19.5145, 13.6314)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="score_detector"]
 visible = false
 position = Vector2(35.0509, 35.7997)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_eqcp8")
 
 [node name="score_time" type="Timer" parent="."]
